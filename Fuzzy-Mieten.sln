@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzzyMieten", "FuzzyMieten\FuzzyMieten.csproj", "{35A58095-F3A4-408E-9411-DD5A7E6228D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{35A58095-F3A4-408E-9411-DD5A7E6228D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A58095-F3A4-408E-9411-DD5A7E6228D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A58095-F3A4-408E-9411-DD5A7E6228D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A58095-F3A4-408E-9411-DD5A7E6228D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F7243F08-4AD5-479B-AAD8-2AA3823310F6}
+	EndGlobalSection
+EndGlobal
