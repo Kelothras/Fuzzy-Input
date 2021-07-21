@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace FuzzyMieten
 {
@@ -53,6 +54,16 @@ namespace FuzzyMieten
         {
             // Programmstart
             deactivateControls();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            // Input-Dialog
+            string strResponse = Interaction.InputBox("Name des Systems", "Neues Fuzzy-System anlegen");
+            if(strResponse != "")
+            {
+
+            }
         }
     }
 }

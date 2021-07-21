@@ -58,11 +58,11 @@ namespace FuzzyMieten
             this.tabCFuzzy.Controls.Add(this.tabPOutput);
             this.tabCFuzzy.Controls.Add(this.tabPRule);
             this.tabCFuzzy.Controls.Add(this.tabPage4);
-            this.tabCFuzzy.Location = new System.Drawing.Point(12, 122);
-            this.tabCFuzzy.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabCFuzzy.Location = new System.Drawing.Point(9, 99);
+            this.tabCFuzzy.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabCFuzzy.Name = "tabCFuzzy";
             this.tabCFuzzy.SelectedIndex = 0;
-            this.tabCFuzzy.Size = new System.Drawing.Size(857, 532);
+            this.tabCFuzzy.Size = new System.Drawing.Size(643, 432);
             this.tabCFuzzy.TabIndex = 0;
             // 
             // tabPInput
@@ -74,20 +74,21 @@ namespace FuzzyMieten
             this.tabPInput.Controls.Add(this.label2);
             this.tabPInput.Controls.Add(this.lstInputs);
             this.tabPInput.Controls.Add(this.btnNewInput);
-            this.tabPInput.Location = new System.Drawing.Point(4, 25);
-            this.tabPInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPInput.Location = new System.Drawing.Point(4, 22);
+            this.tabPInput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPInput.Name = "tabPInput";
-            this.tabPInput.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPInput.Size = new System.Drawing.Size(849, 503);
+            this.tabPInput.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPInput.Size = new System.Drawing.Size(635, 406);
             this.tabPInput.TabIndex = 0;
             this.tabPInput.Text = "Eingangsmengen";
             this.tabPInput.UseVisualStyleBackColor = true;
             // 
             // btnSaveInput
             // 
-            this.btnSaveInput.Location = new System.Drawing.Point(200, 456);
+            this.btnSaveInput.Location = new System.Drawing.Point(150, 370);
+            this.btnSaveInput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSaveInput.Name = "btnSaveInput";
-            this.btnSaveInput.Size = new System.Drawing.Size(91, 23);
+            this.btnSaveInput.Size = new System.Drawing.Size(68, 19);
             this.btnSaveInput.TabIndex = 6;
             this.btnSaveInput.Text = "Speichern";
             this.btnSaveInput.UseVisualStyleBackColor = true;
@@ -95,50 +96,55 @@ namespace FuzzyMieten
             // 
             // txtEinheit
             // 
-            this.txtEinheit.Location = new System.Drawing.Point(10, 425);
+            this.txtEinheit.Location = new System.Drawing.Point(8, 345);
+            this.txtEinheit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtEinheit.Name = "txtEinheit";
-            this.txtEinheit.Size = new System.Drawing.Size(280, 22);
+            this.txtEinheit.Size = new System.Drawing.Size(211, 20);
             this.txtEinheit.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 400);
+            this.label3.Location = new System.Drawing.Point(6, 325);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 17);
+            this.label3.Size = new System.Drawing.Size(39, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Einheit";
             // 
             // txtBez
             // 
-            this.txtBez.Location = new System.Drawing.Point(11, 368);
+            this.txtBez.Location = new System.Drawing.Point(8, 299);
+            this.txtBez.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtBez.Name = "txtBez";
-            this.txtBez.Size = new System.Drawing.Size(280, 22);
+            this.txtBez.Size = new System.Drawing.Size(211, 20);
             this.txtBez.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 343);
+            this.label2.Location = new System.Drawing.Point(7, 279);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 17);
+            this.label2.Size = new System.Drawing.Size(69, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Bezeichnung";
             // 
             // lstInputs
             // 
             this.lstInputs.FormattingEnabled = true;
-            this.lstInputs.ItemHeight = 16;
-            this.lstInputs.Location = new System.Drawing.Point(9, 7);
+            this.lstInputs.Location = new System.Drawing.Point(7, 6);
+            this.lstInputs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lstInputs.Name = "lstInputs";
-            this.lstInputs.Size = new System.Drawing.Size(284, 292);
+            this.lstInputs.Size = new System.Drawing.Size(214, 238);
             this.lstInputs.TabIndex = 1;
             // 
             // btnNewInput
             // 
-            this.btnNewInput.Location = new System.Drawing.Point(8, 305);
+            this.btnNewInput.Location = new System.Drawing.Point(6, 248);
+            this.btnNewInput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNewInput.Name = "btnNewInput";
-            this.btnNewInput.Size = new System.Drawing.Size(99, 23);
+            this.btnNewInput.Size = new System.Drawing.Size(74, 19);
             this.btnNewInput.TabIndex = 0;
             this.btnNewInput.Text = "Hinzufügen";
             this.btnNewInput.UseVisualStyleBackColor = true;
@@ -146,56 +152,57 @@ namespace FuzzyMieten
             // 
             // tabPOutput
             // 
-            this.tabPOutput.Location = new System.Drawing.Point(4, 25);
-            this.tabPOutput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPOutput.Location = new System.Drawing.Point(4, 22);
+            this.tabPOutput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPOutput.Name = "tabPOutput";
-            this.tabPOutput.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPOutput.Size = new System.Drawing.Size(849, 503);
+            this.tabPOutput.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPOutput.Size = new System.Drawing.Size(635, 406);
             this.tabPOutput.TabIndex = 1;
             this.tabPOutput.Text = "Ausgangsmengen";
             this.tabPOutput.UseVisualStyleBackColor = true;
             // 
             // tabPRule
             // 
-            this.tabPRule.Location = new System.Drawing.Point(4, 25);
-            this.tabPRule.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPRule.Location = new System.Drawing.Point(4, 22);
+            this.tabPRule.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPRule.Name = "tabPRule";
-            this.tabPRule.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPRule.Size = new System.Drawing.Size(849, 503);
+            this.tabPRule.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPRule.Size = new System.Drawing.Size(635, 406);
             this.tabPRule.TabIndex = 2;
             this.tabPRule.Text = "Regeln";
             this.tabPRule.UseVisualStyleBackColor = true;
             // 
             // tabPage4
             // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 25);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage4.Size = new System.Drawing.Size(849, 503);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage4.Size = new System.Drawing.Size(635, 406);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(640, 21);
-            this.btnOpen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnOpen.Location = new System.Drawing.Point(480, 17);
+            this.btnOpen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(100, 28);
+            this.btnOpen.Size = new System.Drawing.Size(75, 23);
             this.btnOpen.TabIndex = 1;
             this.btnOpen.Text = "Öffnen";
             this.btnOpen.UseVisualStyleBackColor = true;
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(535, 21);
-            this.btnNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnNew.Location = new System.Drawing.Point(401, 17);
+            this.btnNew.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(100, 28);
+            this.btnNew.Size = new System.Drawing.Size(75, 23);
             this.btnNew.TabIndex = 2;
             this.btnNew.Text = "Neu";
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // groupBox1
             // 
@@ -204,11 +211,11 @@ namespace FuzzyMieten
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnOpen);
             this.groupBox1.Controls.Add(this.btnNew);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Location = new System.Drawing.Point(9, 10);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(852, 65);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(639, 53);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Fuzzy-System";
@@ -216,19 +223,18 @@ namespace FuzzyMieten
             // txtFuzzyName
             // 
             this.txtFuzzyName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtFuzzyName.Location = new System.Drawing.Point(121, 23);
-            this.txtFuzzyName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtFuzzyName.Location = new System.Drawing.Point(91, 19);
             this.txtFuzzyName.Name = "txtFuzzyName";
             this.txtFuzzyName.ReadOnly = true;
-            this.txtFuzzyName.Size = new System.Drawing.Size(365, 22);
+            this.txtFuzzyName.Size = new System.Drawing.Size(274, 20);
             this.txtFuzzyName.TabIndex = 5;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(745, 21);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSave.Location = new System.Drawing.Point(559, 17);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 28);
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Speichern";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -236,21 +242,20 @@ namespace FuzzyMieten
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 27);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(16, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 17);
+            this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Bezeichnung";
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(872, 662);
+            this.ClientSize = new System.Drawing.Size(654, 538);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabCFuzzy);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmMain";
             this.Text = "Fuzzy-Mieten";
             this.Load += new System.EventHandler(this.frmMain_Load);

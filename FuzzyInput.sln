@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzzyMieten", "FuzzyMieten\FuzzyMieten.csproj", "{35A58095-F3A4-408E-9411-DD5A7E6228D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzzyInput", "FuzzyMieten\FuzzyInput.csproj", "{35A58095-F3A4-408E-9411-DD5A7E6228D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
