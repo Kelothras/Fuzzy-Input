@@ -1,5 +1,5 @@
 ﻿
-namespace FuzzyMieten
+namespace FuzzyInput
 {
     partial class frmMain
     {
