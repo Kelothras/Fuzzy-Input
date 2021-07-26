@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using Accord;
 using Accord.Fuzzy;
+using Rule = Accord.Fuzzy.Rule;
 
 namespace FuzzyInput
 {
@@ -18,7 +19,9 @@ namespace FuzzyInput
         public Database fuzzyDB;
         public LinguisticVariable lvEingang;
         public LinguisticVariable lvAusgang;
-        public Menge mEingang;
+        public Rulebase rulebase;
+        public Menge Eingangsmenge;
+        public List<Menge> Eingangsmengen;
 
         public frmMain()
         {
@@ -43,7 +46,7 @@ namespace FuzzyInput
             lstEingang.EndUpdate();
 
             lvEingang = new LinguisticVariable(strInputBez, fInputMin, fInputMax);
-            mEingang = new Menge(lvEingang);
+            Eingangsmenge = new Menge(lvEingang);
             
             deaktiviereEingangsControls();
             aktiviereEingangsTeilmengenControls();
@@ -168,7 +171,8 @@ namespace FuzzyInput
             
             // Fuzzy-Menge zu Eingangsgröße hinzufügen
             lvEingang.AddLabel(fuzzySet);
-            
+            Eingangsmenge.neuesFuzzySet(fuzzySet);
+
             /*
             double[,] coolValues = new double[20, 2];
             for (int i = 0; i < 30; i++)
@@ -223,11 +227,11 @@ namespace FuzzyInput
 
         private void btnTeilMengenOK_Click(object sender, EventArgs e)
         {
-            if(fuzzyDB == null)
-            {
-                fuzzyDB = new Database();
-            }
+            if(fuzzyDB == null){ fuzzyDB = new Database(); }
+            if (Eingangsmengen == null) { Eingangsmengen = new List<Menge>(); }
+
             fuzzyDB.AddVariable(lvEingang);
+            Eingangsmengen.Add(Eingangsmenge);
 
             lvEingang = null;
             btnTeilMengenOK.Enabled = false;
@@ -262,8 +266,6 @@ namespace FuzzyInput
 
             lvAusgang = new LinguisticVariable(strAusgangBez, fAusgangMin, fAusgangMax);
 
-
-
             txtBezAusgang.Text = "";
             txtAusgangMin.Text = "0";
             txtAusgangMax.Text = "100";
@@ -272,5 +274,65 @@ namespace FuzzyInput
             txtAusgangMin.BackColor = Color.White;
             txtAusgangMax.BackColor = Color.White;
         }
+
+        private void btnGenRules_Click(object sender, EventArgs e)
+        {
+            // Regelbasis löschen bzw. instanzieren
+            if(rulebase == null)
+            {
+                rulebase = new Rulebase();
+            }
+            else
+            {
+                rulebase.ClearRules();
+            }
+            // Creating the inference system
+            InferenceSystem IS = new InferenceSystem(fuzzyDB, new CentroidDefuzzifier(1000));
+
+            int i = 1;
+            string strBasis = "";
+            string strRegelNr = "";
+            foreach (Menge menge in Eingangsmengen)
+            {   
+                foreach(FuzzySet fuzzySet in menge.fuzzySets)
+                {
+                    // Regel aufbauen -> Basis 
+                    strRegelNr = "Regel " + Convert.ToString(i);
+                    strBasis = "IF " + menge.linguisticVariable.Name.ToString() + " IS " + fuzzySet.Name.ToString();
+                    i += 1;
+
+                    if (Eingangsmengen.Count > 1)
+                    {
+                        // Regel um jede andere Eingangsvariable erweitern
+                        foreach (Menge untermenge in Eingangsmengen)
+                        {
+                            if (untermenge.linguisticVariable.Name != menge.linguisticVariable.Name)
+                            {
+                                List<string> rules = iterateUntermengen(strBasis, untermenge);
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            
+
+            //Rule r1 = new Rule(fuzzyDB, "Test1", "WENN Steel is not Cold and Stove is Hot then Pressure is Low");
+
+        }
+
+        public List<string>iterateUntermengen(string regel, Menge untermenge)
+        {
+            List<string> rules = new List<string>();
+            foreach (FuzzySet fuzzySetUntermenge in untermenge.fuzzySets)
+            {
+                string strErweiterung = " AND " + untermenge.linguisticVariable.Name.ToString() + " IS " + fuzzySetUntermenge.Name.ToString();
+                rules.Add(strErweiterung);
+            }
+            return rules;
+        }
+
+
     }
 }

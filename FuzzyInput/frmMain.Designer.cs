@@ -39,29 +39,22 @@ namespace FuzzyInput
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lstAusgangTeilmengen = new System.Windows.Forms.ListBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.btnNeuAusgangTeilmenge = new System.Windows.Forms.Button();
             this.txtBezAusgangTeilmenge = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.btnSpeichernAusgangTeilmenge = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.txtAusgangTeilStart = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtAusgangTeilMax = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.txtAusgangTeilMin = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.btnAusgangTeilMengenOK = new System.Windows.Forms.Button();
             this.txtBezAusgang = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.btnNeuAusgang = new System.Windows.Forms.Button();
             this.lstAusgang = new System.Windows.Forms.ListBox();
-            this.btnSpeichernAusgang = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.txtAusgangMin = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtAusgangMax = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabShowOutput = new System.Windows.Forms.TabPage();
             this.chartAusgabe = new Accord.Controls.Chart();
             this.tabPRule = new System.Windows.Forms.TabPage();
@@ -69,30 +62,39 @@ namespace FuzzyInput
             this.splitContainerInput = new System.Windows.Forms.SplitContainer();
             this.lstIEingangTeilmengen = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnNeueEingangTeilmenge = new System.Windows.Forms.Button();
             this.txtBezEingangTeilmenge = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnSpeichernEingangTeilmenge = new System.Windows.Forms.Button();
-            this.btnLoeEingangTeilmenge = new System.Windows.Forms.Button();
             this.txtEingangTeilStart = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtEingangTeilMax = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.txtEingangTeilMin = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.btnTeilMengenOK = new System.Windows.Forms.Button();
             this.txtBezEingang = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnNeuEingang = new System.Windows.Forms.Button();
             this.lstEingang = new System.Windows.Forms.ListBox();
-            this.btnSpeichernEingang = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.txtEingangMin = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtEingangMax = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.btnEingangFertig = new System.Windows.Forms.Button();
             this.tabCFuzzy = new System.Windows.Forms.TabControl();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnEingangFertig = new System.Windows.Forms.Button();
+            this.btnSpeichernEingang = new System.Windows.Forms.Button();
+            this.btnNeuEingang = new System.Windows.Forms.Button();
+            this.btnTeilMengenOK = new System.Windows.Forms.Button();
+            this.btnLoeEingangTeilmenge = new System.Windows.Forms.Button();
+            this.btnSpeichernEingangTeilmenge = new System.Windows.Forms.Button();
+            this.btnNeueEingangTeilmenge = new System.Windows.Forms.Button();
+            this.btnAusgangFertig = new System.Windows.Forms.Button();
+            this.btnSpeichernAusgang = new System.Windows.Forms.Button();
+            this.btnNeuAusgang = new System.Windows.Forms.Button();
+            this.btnAusgangTeilMengenOK = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.btnSpeichernAusgangTeilmenge = new System.Windows.Forms.Button();
+            this.btnNeuAusgangTeilmenge = new System.Windows.Forms.Button();
+            this.btnGenRules = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabPOutput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -100,12 +102,14 @@ namespace FuzzyInput
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabShowOutput.SuspendLayout();
+            this.tabPRule.SuspendLayout();
             this.tabPInput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerInput)).BeginInit();
             this.splitContainerInput.Panel1.SuspendLayout();
             this.splitContainerInput.Panel2.SuspendLayout();
             this.splitContainerInput.SuspendLayout();
             this.tabCFuzzy.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOffnenDatei
@@ -176,7 +180,7 @@ namespace FuzzyInput
             // tabPOutput
             // 
             this.tabPOutput.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPOutput.Controls.Add(this.button1);
+            this.tabPOutput.Controls.Add(this.btnAusgangFertig);
             this.tabPOutput.Controls.Add(this.splitContainer1);
             this.tabPOutput.Location = new System.Drawing.Point(4, 22);
             this.tabPOutput.Margin = new System.Windows.Forms.Padding(2);
@@ -246,19 +250,6 @@ namespace FuzzyInput
             this.label19.TabIndex = 3;
             this.label19.Text = "Teilmengen";
             // 
-            // btnNeuAusgangTeilmenge
-            // 
-            this.btnNeuAusgangTeilmenge.AutoSize = true;
-            this.btnNeuAusgangTeilmenge.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNeuAusgangTeilmenge.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnNeuAusgangTeilmenge.Image = global::FuzzyInput.Properties.Resources.icons8_add_20;
-            this.btnNeuAusgangTeilmenge.Location = new System.Drawing.Point(171, 28);
-            this.btnNeuAusgangTeilmenge.Margin = new System.Windows.Forms.Padding(2);
-            this.btnNeuAusgangTeilmenge.Name = "btnNeuAusgangTeilmenge";
-            this.btnNeuAusgangTeilmenge.Size = new System.Drawing.Size(26, 26);
-            this.btnNeuAusgangTeilmenge.TabIndex = 7;
-            this.btnNeuAusgangTeilmenge.UseVisualStyleBackColor = true;
-            // 
             // txtBezAusgangTeilmenge
             // 
             this.txtBezAusgangTeilmenge.Location = new System.Drawing.Point(11, 257);
@@ -276,32 +267,6 @@ namespace FuzzyInput
             this.label18.Size = new System.Drawing.Size(69, 13);
             this.label18.TabIndex = 8;
             this.label18.Text = "Bezeichnung";
-            // 
-            // btnSpeichernAusgangTeilmenge
-            // 
-            this.btnSpeichernAusgangTeilmenge.AutoSize = true;
-            this.btnSpeichernAusgangTeilmenge.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSpeichernAusgangTeilmenge.Image = global::FuzzyInput.Properties.Resources.icons8_save_20;
-            this.btnSpeichernAusgangTeilmenge.Location = new System.Drawing.Point(171, 253);
-            this.btnSpeichernAusgangTeilmenge.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSpeichernAusgangTeilmenge.Name = "btnSpeichernAusgangTeilmenge";
-            this.btnSpeichernAusgangTeilmenge.Size = new System.Drawing.Size(85, 26);
-            this.btnSpeichernAusgangTeilmenge.TabIndex = 10;
-            this.btnSpeichernAusgangTeilmenge.Text = "Speichern";
-            this.btnSpeichernAusgangTeilmenge.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSpeichernAusgangTeilmenge.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.AutoSize = true;
-            this.button5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button5.Image = global::FuzzyInput.Properties.Resources.icons8_cancel_20;
-            this.button5.Location = new System.Drawing.Point(171, 58);
-            this.button5.Margin = new System.Windows.Forms.Padding(2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(26, 26);
-            this.button5.TabIndex = 11;
-            this.button5.UseVisualStyleBackColor = true;
             // 
             // txtAusgangTeilStart
             // 
@@ -357,19 +322,6 @@ namespace FuzzyInput
             this.label15.TabIndex = 17;
             this.label15.Text = "Minimum";
             // 
-            // btnAusgangTeilMengenOK
-            // 
-            this.btnAusgangTeilMengenOK.AutoSize = true;
-            this.btnAusgangTeilMengenOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAusgangTeilMengenOK.Image = global::FuzzyInput.Properties.Resources.icons8_ok_20;
-            this.btnAusgangTeilMengenOK.Location = new System.Drawing.Point(180, 368);
-            this.btnAusgangTeilMengenOK.Name = "btnAusgangTeilMengenOK";
-            this.btnAusgangTeilMengenOK.Size = new System.Drawing.Size(145, 26);
-            this.btnAusgangTeilMengenOK.TabIndex = 9;
-            this.btnAusgangTeilMengenOK.Text = "Teilmengen vollständig";
-            this.btnAusgangTeilMengenOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAusgangTeilMengenOK.UseVisualStyleBackColor = true;
-            // 
             // txtBezAusgang
             // 
             this.txtBezAusgang.Location = new System.Drawing.Point(10, 257);
@@ -388,19 +340,6 @@ namespace FuzzyInput
             this.label14.TabIndex = 2;
             this.label14.Text = "Bezeichnung";
             // 
-            // btnNeuAusgang
-            // 
-            this.btnNeuAusgang.AutoSize = true;
-            this.btnNeuAusgang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNeuAusgang.Image = global::FuzzyInput.Properties.Resources.icons8_add_20;
-            this.btnNeuAusgang.Location = new System.Drawing.Point(183, 28);
-            this.btnNeuAusgang.Margin = new System.Windows.Forms.Padding(2);
-            this.btnNeuAusgang.Name = "btnNeuAusgang";
-            this.btnNeuAusgang.Size = new System.Drawing.Size(26, 26);
-            this.btnNeuAusgang.TabIndex = 0;
-            this.btnNeuAusgang.UseVisualStyleBackColor = true;
-            this.btnNeuAusgang.Click += new System.EventHandler(this.btnNeuAusgang_Click);
-            // 
             // lstAusgang
             // 
             this.lstAusgang.FormattingEnabled = true;
@@ -409,22 +348,6 @@ namespace FuzzyInput
             this.lstAusgang.Name = "lstAusgang";
             this.lstAusgang.Size = new System.Drawing.Size(165, 212);
             this.lstAusgang.TabIndex = 1;
-            // 
-            // btnSpeichernAusgang
-            // 
-            this.btnSpeichernAusgang.AutoSize = true;
-            this.btnSpeichernAusgang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSpeichernAusgang.Image = global::FuzzyInput.Properties.Resources.icons8_save_20;
-            this.btnSpeichernAusgang.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSpeichernAusgang.Location = new System.Drawing.Point(179, 253);
-            this.btnSpeichernAusgang.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSpeichernAusgang.Name = "btnSpeichernAusgang";
-            this.btnSpeichernAusgang.Size = new System.Drawing.Size(85, 26);
-            this.btnSpeichernAusgang.TabIndex = 6;
-            this.btnSpeichernAusgang.Text = "Speichern";
-            this.btnSpeichernAusgang.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSpeichernAusgang.UseVisualStyleBackColor = true;
-            this.btnSpeichernAusgang.Click += new System.EventHandler(this.btnSpeichernAusgang_Click);
             // 
             // label9
             // 
@@ -474,19 +397,6 @@ namespace FuzzyInput
             this.label7.TabIndex = 14;
             this.label7.Text = "Maximum";
             // 
-            // button1
-            // 
-            this.button1.AutoSize = true;
-            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.Image = global::FuzzyInput.Properties.Resources.icons8_ok_20;
-            this.button1.Location = new System.Drawing.Point(506, 413);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 26);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Eingang vollständig";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // tabShowOutput
             // 
             this.tabShowOutput.Controls.Add(this.chartAusgabe);
@@ -509,6 +419,9 @@ namespace FuzzyInput
             // 
             // tabPRule
             // 
+            this.tabPRule.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPRule.Controls.Add(this.dataGridView1);
+            this.tabPRule.Controls.Add(this.btnGenRules);
             this.tabPRule.Location = new System.Drawing.Point(4, 22);
             this.tabPRule.Margin = new System.Windows.Forms.Padding(2);
             this.tabPRule.Name = "tabPRule";
@@ -516,7 +429,6 @@ namespace FuzzyInput
             this.tabPRule.Size = new System.Drawing.Size(641, 451);
             this.tabPRule.TabIndex = 2;
             this.tabPRule.Text = "Regeln";
-            this.tabPRule.UseVisualStyleBackColor = true;
             // 
             // tabPInput
             // 
@@ -591,20 +503,6 @@ namespace FuzzyInput
             this.label4.TabIndex = 3;
             this.label4.Text = "Teilmengen";
             // 
-            // btnNeueEingangTeilmenge
-            // 
-            this.btnNeueEingangTeilmenge.AutoSize = true;
-            this.btnNeueEingangTeilmenge.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNeueEingangTeilmenge.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnNeueEingangTeilmenge.Image = global::FuzzyInput.Properties.Resources.icons8_add_20;
-            this.btnNeueEingangTeilmenge.Location = new System.Drawing.Point(171, 28);
-            this.btnNeueEingangTeilmenge.Margin = new System.Windows.Forms.Padding(2);
-            this.btnNeueEingangTeilmenge.Name = "btnNeueEingangTeilmenge";
-            this.btnNeueEingangTeilmenge.Size = new System.Drawing.Size(26, 26);
-            this.btnNeueEingangTeilmenge.TabIndex = 7;
-            this.btnNeueEingangTeilmenge.UseVisualStyleBackColor = true;
-            this.btnNeueEingangTeilmenge.Click += new System.EventHandler(this.btnNewTeilmenge_Click);
-            // 
             // txtBezEingangTeilmenge
             // 
             this.txtBezEingangTeilmenge.Location = new System.Drawing.Point(11, 257);
@@ -622,33 +520,6 @@ namespace FuzzyInput
             this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "Bezeichnung";
-            // 
-            // btnSpeichernEingangTeilmenge
-            // 
-            this.btnSpeichernEingangTeilmenge.AutoSize = true;
-            this.btnSpeichernEingangTeilmenge.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSpeichernEingangTeilmenge.Image = global::FuzzyInput.Properties.Resources.icons8_save_20;
-            this.btnSpeichernEingangTeilmenge.Location = new System.Drawing.Point(171, 253);
-            this.btnSpeichernEingangTeilmenge.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSpeichernEingangTeilmenge.Name = "btnSpeichernEingangTeilmenge";
-            this.btnSpeichernEingangTeilmenge.Size = new System.Drawing.Size(85, 26);
-            this.btnSpeichernEingangTeilmenge.TabIndex = 10;
-            this.btnSpeichernEingangTeilmenge.Text = "Speichern";
-            this.btnSpeichernEingangTeilmenge.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSpeichernEingangTeilmenge.UseVisualStyleBackColor = true;
-            this.btnSpeichernEingangTeilmenge.Click += new System.EventHandler(this.btnSpeichernEingangTeilmenge_Click);
-            // 
-            // btnLoeEingangTeilmenge
-            // 
-            this.btnLoeEingangTeilmenge.AutoSize = true;
-            this.btnLoeEingangTeilmenge.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnLoeEingangTeilmenge.Image = global::FuzzyInput.Properties.Resources.icons8_cancel_20;
-            this.btnLoeEingangTeilmenge.Location = new System.Drawing.Point(171, 58);
-            this.btnLoeEingangTeilmenge.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLoeEingangTeilmenge.Name = "btnLoeEingangTeilmenge";
-            this.btnLoeEingangTeilmenge.Size = new System.Drawing.Size(26, 26);
-            this.btnLoeEingangTeilmenge.TabIndex = 11;
-            this.btnLoeEingangTeilmenge.UseVisualStyleBackColor = true;
             // 
             // txtEingangTeilStart
             // 
@@ -704,20 +575,6 @@ namespace FuzzyInput
             this.label13.TabIndex = 17;
             this.label13.Text = "Minimum";
             // 
-            // btnTeilMengenOK
-            // 
-            this.btnTeilMengenOK.AutoSize = true;
-            this.btnTeilMengenOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnTeilMengenOK.Image = global::FuzzyInput.Properties.Resources.icons8_ok_20;
-            this.btnTeilMengenOK.Location = new System.Drawing.Point(180, 368);
-            this.btnTeilMengenOK.Name = "btnTeilMengenOK";
-            this.btnTeilMengenOK.Size = new System.Drawing.Size(145, 26);
-            this.btnTeilMengenOK.TabIndex = 9;
-            this.btnTeilMengenOK.Text = "Teilmengen vollständig";
-            this.btnTeilMengenOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTeilMengenOK.UseVisualStyleBackColor = true;
-            this.btnTeilMengenOK.Click += new System.EventHandler(this.btnTeilMengenOK_Click);
-            // 
             // txtBezEingang
             // 
             this.txtBezEingang.Location = new System.Drawing.Point(10, 257);
@@ -736,19 +593,6 @@ namespace FuzzyInput
             this.label2.TabIndex = 2;
             this.label2.Text = "Bezeichnung";
             // 
-            // btnNeuEingang
-            // 
-            this.btnNeuEingang.AutoSize = true;
-            this.btnNeuEingang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNeuEingang.Image = global::FuzzyInput.Properties.Resources.icons8_add_20;
-            this.btnNeuEingang.Location = new System.Drawing.Point(183, 28);
-            this.btnNeuEingang.Margin = new System.Windows.Forms.Padding(2);
-            this.btnNeuEingang.Name = "btnNeuEingang";
-            this.btnNeuEingang.Size = new System.Drawing.Size(26, 26);
-            this.btnNeuEingang.TabIndex = 0;
-            this.btnNeuEingang.UseVisualStyleBackColor = true;
-            this.btnNeuEingang.Click += new System.EventHandler(this.btnNewInput_Click);
-            // 
             // lstEingang
             // 
             this.lstEingang.FormattingEnabled = true;
@@ -758,22 +602,6 @@ namespace FuzzyInput
             this.lstEingang.Size = new System.Drawing.Size(165, 212);
             this.lstEingang.TabIndex = 1;
             this.lstEingang.SelectedIndexChanged += new System.EventHandler(this.lstEingang_SelectedIndexChanged);
-            // 
-            // btnSpeichernEingang
-            // 
-            this.btnSpeichernEingang.AutoSize = true;
-            this.btnSpeichernEingang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSpeichernEingang.Image = global::FuzzyInput.Properties.Resources.icons8_save_20;
-            this.btnSpeichernEingang.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSpeichernEingang.Location = new System.Drawing.Point(179, 253);
-            this.btnSpeichernEingang.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSpeichernEingang.Name = "btnSpeichernEingang";
-            this.btnSpeichernEingang.Size = new System.Drawing.Size(85, 26);
-            this.btnSpeichernEingang.TabIndex = 6;
-            this.btnSpeichernEingang.Text = "Speichern";
-            this.btnSpeichernEingang.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSpeichernEingang.UseVisualStyleBackColor = true;
-            this.btnSpeichernEingang.Click += new System.EventHandler(this.btnSaveInput_Click);
             // 
             // label6
             // 
@@ -823,6 +651,27 @@ namespace FuzzyInput
             this.label10.TabIndex = 14;
             this.label10.Text = "Maximum";
             // 
+            // tabCFuzzy
+            // 
+            this.tabCFuzzy.Controls.Add(this.tabPInput);
+            this.tabCFuzzy.Controls.Add(this.tabPOutput);
+            this.tabCFuzzy.Controls.Add(this.tabPRule);
+            this.tabCFuzzy.Controls.Add(this.tabShowOutput);
+            this.tabCFuzzy.Location = new System.Drawing.Point(9, 99);
+            this.tabCFuzzy.Margin = new System.Windows.Forms.Padding(2);
+            this.tabCFuzzy.Name = "tabCFuzzy";
+            this.tabCFuzzy.SelectedIndex = 0;
+            this.tabCFuzzy.Size = new System.Drawing.Size(649, 477);
+            this.tabCFuzzy.TabIndex = 0;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(5, 37);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(625, 409);
+            this.dataGridView1.TabIndex = 10;
+            // 
             // btnEingangFertig
             // 
             this.btnEingangFertig.AutoSize = true;
@@ -837,18 +686,197 @@ namespace FuzzyInput
             this.btnEingangFertig.UseVisualStyleBackColor = true;
             this.btnEingangFertig.Click += new System.EventHandler(this.btnEingangFertig_Click);
             // 
-            // tabCFuzzy
+            // btnSpeichernEingang
             // 
-            this.tabCFuzzy.Controls.Add(this.tabPInput);
-            this.tabCFuzzy.Controls.Add(this.tabPOutput);
-            this.tabCFuzzy.Controls.Add(this.tabPRule);
-            this.tabCFuzzy.Controls.Add(this.tabShowOutput);
-            this.tabCFuzzy.Location = new System.Drawing.Point(9, 99);
-            this.tabCFuzzy.Margin = new System.Windows.Forms.Padding(2);
-            this.tabCFuzzy.Name = "tabCFuzzy";
-            this.tabCFuzzy.SelectedIndex = 0;
-            this.tabCFuzzy.Size = new System.Drawing.Size(649, 477);
-            this.tabCFuzzy.TabIndex = 0;
+            this.btnSpeichernEingang.AutoSize = true;
+            this.btnSpeichernEingang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSpeichernEingang.Image = global::FuzzyInput.Properties.Resources.icons8_save_20;
+            this.btnSpeichernEingang.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSpeichernEingang.Location = new System.Drawing.Point(179, 253);
+            this.btnSpeichernEingang.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSpeichernEingang.Name = "btnSpeichernEingang";
+            this.btnSpeichernEingang.Size = new System.Drawing.Size(85, 26);
+            this.btnSpeichernEingang.TabIndex = 6;
+            this.btnSpeichernEingang.Text = "Speichern";
+            this.btnSpeichernEingang.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSpeichernEingang.UseVisualStyleBackColor = true;
+            this.btnSpeichernEingang.Click += new System.EventHandler(this.btnSaveInput_Click);
+            // 
+            // btnNeuEingang
+            // 
+            this.btnNeuEingang.AutoSize = true;
+            this.btnNeuEingang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNeuEingang.Image = global::FuzzyInput.Properties.Resources.icons8_add_20;
+            this.btnNeuEingang.Location = new System.Drawing.Point(183, 28);
+            this.btnNeuEingang.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNeuEingang.Name = "btnNeuEingang";
+            this.btnNeuEingang.Size = new System.Drawing.Size(26, 26);
+            this.btnNeuEingang.TabIndex = 0;
+            this.btnNeuEingang.UseVisualStyleBackColor = true;
+            this.btnNeuEingang.Click += new System.EventHandler(this.btnNewInput_Click);
+            // 
+            // btnTeilMengenOK
+            // 
+            this.btnTeilMengenOK.AutoSize = true;
+            this.btnTeilMengenOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTeilMengenOK.Image = global::FuzzyInput.Properties.Resources.icons8_ok_20;
+            this.btnTeilMengenOK.Location = new System.Drawing.Point(180, 368);
+            this.btnTeilMengenOK.Name = "btnTeilMengenOK";
+            this.btnTeilMengenOK.Size = new System.Drawing.Size(145, 26);
+            this.btnTeilMengenOK.TabIndex = 9;
+            this.btnTeilMengenOK.Text = "Teilmengen vollständig";
+            this.btnTeilMengenOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnTeilMengenOK.UseVisualStyleBackColor = true;
+            this.btnTeilMengenOK.Click += new System.EventHandler(this.btnTeilMengenOK_Click);
+            // 
+            // btnLoeEingangTeilmenge
+            // 
+            this.btnLoeEingangTeilmenge.AutoSize = true;
+            this.btnLoeEingangTeilmenge.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLoeEingangTeilmenge.Image = global::FuzzyInput.Properties.Resources.icons8_cancel_20;
+            this.btnLoeEingangTeilmenge.Location = new System.Drawing.Point(171, 58);
+            this.btnLoeEingangTeilmenge.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLoeEingangTeilmenge.Name = "btnLoeEingangTeilmenge";
+            this.btnLoeEingangTeilmenge.Size = new System.Drawing.Size(26, 26);
+            this.btnLoeEingangTeilmenge.TabIndex = 11;
+            this.btnLoeEingangTeilmenge.UseVisualStyleBackColor = true;
+            // 
+            // btnSpeichernEingangTeilmenge
+            // 
+            this.btnSpeichernEingangTeilmenge.AutoSize = true;
+            this.btnSpeichernEingangTeilmenge.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSpeichernEingangTeilmenge.Image = global::FuzzyInput.Properties.Resources.icons8_save_20;
+            this.btnSpeichernEingangTeilmenge.Location = new System.Drawing.Point(171, 253);
+            this.btnSpeichernEingangTeilmenge.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSpeichernEingangTeilmenge.Name = "btnSpeichernEingangTeilmenge";
+            this.btnSpeichernEingangTeilmenge.Size = new System.Drawing.Size(85, 26);
+            this.btnSpeichernEingangTeilmenge.TabIndex = 10;
+            this.btnSpeichernEingangTeilmenge.Text = "Speichern";
+            this.btnSpeichernEingangTeilmenge.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSpeichernEingangTeilmenge.UseVisualStyleBackColor = true;
+            this.btnSpeichernEingangTeilmenge.Click += new System.EventHandler(this.btnSpeichernEingangTeilmenge_Click);
+            // 
+            // btnNeueEingangTeilmenge
+            // 
+            this.btnNeueEingangTeilmenge.AutoSize = true;
+            this.btnNeueEingangTeilmenge.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNeueEingangTeilmenge.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnNeueEingangTeilmenge.Image = global::FuzzyInput.Properties.Resources.icons8_add_20;
+            this.btnNeueEingangTeilmenge.Location = new System.Drawing.Point(171, 28);
+            this.btnNeueEingangTeilmenge.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNeueEingangTeilmenge.Name = "btnNeueEingangTeilmenge";
+            this.btnNeueEingangTeilmenge.Size = new System.Drawing.Size(26, 26);
+            this.btnNeueEingangTeilmenge.TabIndex = 7;
+            this.btnNeueEingangTeilmenge.UseVisualStyleBackColor = true;
+            this.btnNeueEingangTeilmenge.Click += new System.EventHandler(this.btnNewTeilmenge_Click);
+            // 
+            // btnAusgangFertig
+            // 
+            this.btnAusgangFertig.AutoSize = true;
+            this.btnAusgangFertig.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAusgangFertig.Image = global::FuzzyInput.Properties.Resources.icons8_ok_20;
+            this.btnAusgangFertig.Location = new System.Drawing.Point(503, 413);
+            this.btnAusgangFertig.Name = "btnAusgangFertig";
+            this.btnAusgangFertig.Size = new System.Drawing.Size(132, 26);
+            this.btnAusgangFertig.TabIndex = 8;
+            this.btnAusgangFertig.Text = "Ausgang vollständig";
+            this.btnAusgangFertig.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAusgangFertig.UseVisualStyleBackColor = true;
+            // 
+            // btnSpeichernAusgang
+            // 
+            this.btnSpeichernAusgang.AutoSize = true;
+            this.btnSpeichernAusgang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSpeichernAusgang.Image = global::FuzzyInput.Properties.Resources.icons8_save_20;
+            this.btnSpeichernAusgang.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSpeichernAusgang.Location = new System.Drawing.Point(179, 253);
+            this.btnSpeichernAusgang.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSpeichernAusgang.Name = "btnSpeichernAusgang";
+            this.btnSpeichernAusgang.Size = new System.Drawing.Size(85, 26);
+            this.btnSpeichernAusgang.TabIndex = 6;
+            this.btnSpeichernAusgang.Text = "Speichern";
+            this.btnSpeichernAusgang.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSpeichernAusgang.UseVisualStyleBackColor = true;
+            this.btnSpeichernAusgang.Click += new System.EventHandler(this.btnSpeichernAusgang_Click);
+            // 
+            // btnNeuAusgang
+            // 
+            this.btnNeuAusgang.AutoSize = true;
+            this.btnNeuAusgang.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNeuAusgang.Image = global::FuzzyInput.Properties.Resources.icons8_add_20;
+            this.btnNeuAusgang.Location = new System.Drawing.Point(183, 28);
+            this.btnNeuAusgang.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNeuAusgang.Name = "btnNeuAusgang";
+            this.btnNeuAusgang.Size = new System.Drawing.Size(26, 26);
+            this.btnNeuAusgang.TabIndex = 0;
+            this.btnNeuAusgang.UseVisualStyleBackColor = true;
+            this.btnNeuAusgang.Click += new System.EventHandler(this.btnNeuAusgang_Click);
+            // 
+            // btnAusgangTeilMengenOK
+            // 
+            this.btnAusgangTeilMengenOK.AutoSize = true;
+            this.btnAusgangTeilMengenOK.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAusgangTeilMengenOK.Image = global::FuzzyInput.Properties.Resources.icons8_ok_20;
+            this.btnAusgangTeilMengenOK.Location = new System.Drawing.Point(180, 368);
+            this.btnAusgangTeilMengenOK.Name = "btnAusgangTeilMengenOK";
+            this.btnAusgangTeilMengenOK.Size = new System.Drawing.Size(145, 26);
+            this.btnAusgangTeilMengenOK.TabIndex = 9;
+            this.btnAusgangTeilMengenOK.Text = "Teilmengen vollständig";
+            this.btnAusgangTeilMengenOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAusgangTeilMengenOK.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.AutoSize = true;
+            this.button5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button5.Image = global::FuzzyInput.Properties.Resources.icons8_cancel_20;
+            this.button5.Location = new System.Drawing.Point(171, 58);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(26, 26);
+            this.button5.TabIndex = 11;
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // btnSpeichernAusgangTeilmenge
+            // 
+            this.btnSpeichernAusgangTeilmenge.AutoSize = true;
+            this.btnSpeichernAusgangTeilmenge.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSpeichernAusgangTeilmenge.Image = global::FuzzyInput.Properties.Resources.icons8_save_20;
+            this.btnSpeichernAusgangTeilmenge.Location = new System.Drawing.Point(171, 253);
+            this.btnSpeichernAusgangTeilmenge.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSpeichernAusgangTeilmenge.Name = "btnSpeichernAusgangTeilmenge";
+            this.btnSpeichernAusgangTeilmenge.Size = new System.Drawing.Size(85, 26);
+            this.btnSpeichernAusgangTeilmenge.TabIndex = 10;
+            this.btnSpeichernAusgangTeilmenge.Text = "Speichern";
+            this.btnSpeichernAusgangTeilmenge.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSpeichernAusgangTeilmenge.UseVisualStyleBackColor = true;
+            // 
+            // btnNeuAusgangTeilmenge
+            // 
+            this.btnNeuAusgangTeilmenge.AutoSize = true;
+            this.btnNeuAusgangTeilmenge.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNeuAusgangTeilmenge.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnNeuAusgangTeilmenge.Image = global::FuzzyInput.Properties.Resources.icons8_add_20;
+            this.btnNeuAusgangTeilmenge.Location = new System.Drawing.Point(171, 28);
+            this.btnNeuAusgangTeilmenge.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNeuAusgangTeilmenge.Name = "btnNeuAusgangTeilmenge";
+            this.btnNeuAusgangTeilmenge.Size = new System.Drawing.Size(26, 26);
+            this.btnNeuAusgangTeilmenge.TabIndex = 7;
+            this.btnNeuAusgangTeilmenge.UseVisualStyleBackColor = true;
+            // 
+            // btnGenRules
+            // 
+            this.btnGenRules.AutoSize = true;
+            this.btnGenRules.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGenRules.Image = global::FuzzyInput.Properties.Resources.icons8_stumbleupon_20;
+            this.btnGenRules.Location = new System.Drawing.Point(5, 5);
+            this.btnGenRules.Name = "btnGenRules";
+            this.btnGenRules.Size = new System.Drawing.Size(124, 26);
+            this.btnGenRules.TabIndex = 9;
+            this.btnGenRules.Text = "Regeln generieren";
+            this.btnGenRules.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGenRules.UseVisualStyleBackColor = true;
+            this.btnGenRules.Click += new System.EventHandler(this.btnGenRules_Click);
             // 
             // frmMain
             // 
@@ -872,6 +900,8 @@ namespace FuzzyInput
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabShowOutput.ResumeLayout(false);
+            this.tabPRule.ResumeLayout(false);
+            this.tabPRule.PerformLayout();
             this.tabPInput.ResumeLayout(false);
             this.tabPInput.PerformLayout();
             this.splitContainerInput.Panel1.ResumeLayout(false);
@@ -881,6 +911,7 @@ namespace FuzzyInput
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerInput)).EndInit();
             this.splitContainerInput.ResumeLayout(false);
             this.tabCFuzzy.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -893,7 +924,7 @@ namespace FuzzyInput
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtFuzzyName;
         private System.Windows.Forms.TabPage tabPOutput;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAusgangFertig;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtAusgangMax;
@@ -950,6 +981,8 @@ namespace FuzzyInput
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.ListBox lstIEingangTeilmengen;
         private System.Windows.Forms.TabControl tabCFuzzy;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnGenRules;
     }
 }
 

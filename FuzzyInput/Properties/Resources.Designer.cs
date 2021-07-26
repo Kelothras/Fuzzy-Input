@@ -119,5 +119,15 @@ namespace FuzzyInput.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_stumbleupon_20 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-stumbleupon-20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

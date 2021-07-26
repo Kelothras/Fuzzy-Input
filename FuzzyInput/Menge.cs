@@ -19,6 +19,7 @@ namespace FuzzyInput
         public Menge(LinguisticVariable linguisticVariable)
         {
             this.linguisticVariable = linguisticVariable;
+            this.fuzzySets = new List<FuzzySet>();
         }
 
         public void neuesFuzzySet(FuzzySet fuzzySet)
@@ -30,8 +31,6 @@ namespace FuzzyInput
         {
             this.fuzzySets.Remove(fuzzySet);   
         }
-
-
     }
 
     
