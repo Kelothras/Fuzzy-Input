@@ -103,6 +103,16 @@ namespace FuzzyInput.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_ok_20 {
+            get {
+                object obj = ResourceManager.GetObject("icons8-ok-20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_save_20 {
             get {
                 object obj = ResourceManager.GetObject("icons8-save-20", resourceCulture);

@@ -17,6 +17,7 @@ namespace FuzzyInput
     {
         public Database fuzzyDB;
         public LinguisticVariable lvEingang;
+        public LinguisticVariable lvAusgang;
         public Menge mEingang;
 
         public frmMain()
@@ -46,13 +47,16 @@ namespace FuzzyInput
             
             deaktiviereEingangsControls();
             aktiviereEingangsTeilmengenControls();
-            leereEingangsControls();
+
+            txtBezEingang.Text = "";
+            txtEingangMin.Text = "0";
+            txtEingangMax.Text = "100";
+
+            txtBezEingang.BackColor = Color.White;
+            txtEingangMax.BackColor = Color.White;
+            txtEingangMin.BackColor = Color.White;
         }
 
-        private void leereEingangsControls()
-        {
-            txtBezEingang.Text = "";
-        }
 
         private void deaktiviereEingangsControls()
         {   
@@ -64,9 +68,20 @@ namespace FuzzyInput
 
             // EingangsTeilmengen
             txtBezEingangTeilmenge.Enabled = false;
+            txtEingangTeilStart.Enabled = false;
+            txtEingangTeilMin.Enabled = false;
+            txtEingangTeilMax.Enabled = false;
             btnNeueEingangTeilmenge.Enabled = false;
             btnSpeichernEingangTeilmenge.Enabled = false;
             btnLoeEingangTeilmenge.Enabled = false;
+        }
+        private void aktiviereAusgangsControls()
+        {
+            txtBezAusgang.Enabled = true;
+            txtAusgangMin.Enabled = true;
+            txtAusgangMax.Enabled = true;
+            btnSpeichernAusgang.Enabled = true;
+            btnNeuAusgang.Enabled = false;
         }
         private void aktiviereEingangsControls()
         {
@@ -93,14 +108,18 @@ namespace FuzzyInput
         // Neue Eingangsvariable
         private void btnNewInput_Click(object sender, EventArgs e)
         {
+            // Felder aktivieren und Farbe ändern
             aktiviereEingangsControls();
+            txtBezEingang.BackColor = Color.LightYellow;
+            txtEingangMax.BackColor = Color.LightYellow;
+            txtEingangMin.BackColor = Color.LightYellow;
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
             // Programmstart
-            tabCFuzzy.Enabled = false;
-            deaktiviereEingangsControls();
+            //tabCFuzzy.Enabled = false;
+            //deaktiviereEingangsControls();
         }
 
         // Neues Fuzzy-System
@@ -120,26 +139,37 @@ namespace FuzzyInput
         // Neue Teilmenge anlegen
         private void btnNewTeilmenge_Click(object sender, EventArgs e)
         {
-            txtBezEingangTeilmenge.Enabled = true;
+            // Felder aktivieren und Farbe ändern
+            txtBezEingangTeilmenge.Enabled = true; txtBezEingangTeilmenge.BackColor = Color.LightYellow;
+            txtEingangTeilStart.Enabled = true; txtEingangTeilStart.BackColor = Color.LightYellow;
+            txtEingangTeilMin.Enabled = true; txtEingangTeilMin.BackColor = Color.LightYellow;
+            txtEingangTeilMax.Enabled = true; txtEingangTeilMax.BackColor = Color.LightYellow;
             btnSpeichernEingangTeilmenge.Enabled = true;
         }
 
         private void lstEingang_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("Wechsel");
+            
         }
 
         private void btnSpeichernEingangTeilmenge_Click(object sender, EventArgs e)
         {
             string strEingangTeilmenge = txtBezEingangTeilmenge.Text;
+            float fEingangTeilStart = float.Parse(txtEingangTeilStart.Text);
+            float fEingangTeilMax = float.Parse(txtEingangTeilMax.Text);
+            float fEingangTeilMin = float.Parse(txtEingangTeilMin.Text);
+
             lstIEingangTeilmengen.Items.Add(strEingangTeilmenge);
             lstIEingangTeilmengen.EndUpdate();
 
             // Neues Fuzzy-Set anlegen (Teilmenge) 
-            TrapezoidalFunction trapezoidalFunction = new TrapezoidalFunction(6, 6, TrapezoidalFunction.EdgeType.Right);
+            TrapezoidalFunction trapezoidalFunction = new TrapezoidalFunction(fEingangTeilStart, fEingangTeilMax, fEingangTeilMin);
             FuzzySet fuzzySet = new FuzzySet(strEingangTeilmenge, trapezoidalFunction);
-
             
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvEingang.AddLabel(fuzzySet);
+            
+            /*
             double[,] coolValues = new double[20, 2];
             for (int i = 0; i < 30; i++)
             {
@@ -147,9 +177,21 @@ namespace FuzzyInput
                 coolValues[i - 10, 1] = fuzzySet.GetMembership(i);
             }
             chartAusgabe.UpdateDataSeries("COOL", coolValues);
-            
+            */
 
-            txtBezEingangTeilmenge.Enabled = false;
+            // Felder leeren
+            txtBezEingangTeilmenge.Text = "";
+            txtEingangTeilStart.Text = "0";
+            txtEingangTeilMax.Text = "0";
+            txtEingangTeilMin.Text = "0";
+
+            // Felder deaktivieren und Farbe ändern
+            txtBezEingangTeilmenge.Enabled = false; txtBezEingangTeilmenge.BackColor = Color.White;
+            txtEingangTeilStart.Enabled = false; txtEingangTeilStart.BackColor = Color.White;
+            txtEingangTeilMax.Enabled = false; txtEingangTeilMax.BackColor = Color.White;
+            txtEingangTeilMin.Enabled = false; txtEingangTeilMin.BackColor = Color.White;
+
+            btnTeilMengenOK.Enabled = true;
             btnSpeichernEingangTeilmenge.Enabled = false;
             btnNeuEingang.Enabled = true;
         }
@@ -179,5 +221,56 @@ namespace FuzzyInput
             chartAusgabe.AddDataSeries("HOT", Color.Firebrick, Accord.Controls.Chart.SeriesType.Line, 3, true);
         }
 
+        private void btnTeilMengenOK_Click(object sender, EventArgs e)
+        {
+            if(fuzzyDB == null)
+            {
+                fuzzyDB = new Database();
+            }
+            fuzzyDB.AddVariable(lvEingang);
+
+            lvEingang = null;
+            btnTeilMengenOK.Enabled = false;
+            btnNeuEingang.Enabled = true;
+            lstIEingangTeilmengen.Items.Clear();
+        }
+
+        private void btnNeuAusgang_Click(object sender, EventArgs e)
+        {
+            // Felder aktivieren und Farbe ändern
+            aktiviereEingangsControls();
+            txtBezAusgang.BackColor = Color.LightYellow;
+            txtAusgangMax.BackColor = Color.LightYellow;
+            txtAusgangMin.BackColor = Color.LightYellow;
+        }
+
+        private void btnSpeichernAusgang_Click(object sender, EventArgs e)
+        {
+            string strAusgangBez = txtBezAusgang.Text;
+            float fAusgangMin = float.Parse(txtAusgangMin.Text);
+            float fAusgangMax = float.Parse(txtAusgangMax.Text);
+
+            // Prüfen ob Eingangsvariable bereits vorhanden ist
+            if (lstAusgang.Items.Contains(strAusgangBez) == true)
+            {
+                MessageBox.Show("Ausgangsgröße bereits vorhanden", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            };
+
+            lstAusgang.Items.Add(strAusgangBez);
+            lstAusgang.EndUpdate();
+
+            lvAusgang = new LinguisticVariable(strAusgangBez, fAusgangMin, fAusgangMax);
+
+
+
+            txtBezAusgang.Text = "";
+            txtAusgangMin.Text = "0";
+            txtAusgangMax.Text = "100";
+
+            txtBezAusgang.BackColor = Color.White;
+            txtAusgangMin.BackColor = Color.White;
+            txtAusgangMax.BackColor = Color.White;
+        }
     }
 }
