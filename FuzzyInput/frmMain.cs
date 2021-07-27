@@ -21,7 +21,9 @@ namespace FuzzyInput
         public LinguisticVariable lvAusgang;
         public Rulebase rulebase;
         public Menge Eingangsmenge;
+        public Menge Ausgangmenge;
         public List<Menge> Eingangsmengen;
+        public List<Menge> Ausgangsmengen;
 
         public frmMain()
         {
@@ -123,6 +125,7 @@ namespace FuzzyInput
             // Programmstart
             //tabCFuzzy.Enabled = false;
             //deaktiviereEingangsControls();
+
         }
 
         // Neues Fuzzy-System
@@ -136,7 +139,7 @@ namespace FuzzyInput
                 tabCFuzzy.Enabled = true;
             }
 
-            zeichneAusgabe();
+            
         }
 
         // Neue Teilmenge anlegen
@@ -210,20 +213,6 @@ namespace FuzzyInput
 
         }
 
-        // Clear all data series data
-        private void ClearDataSeries()
-        {
-
-        }
-
-        private void zeichneAusgabe() 
-        {
-            chartAusgabe.RangeX = new Range(0, 20);
-            chartAusgabe.AddDataSeries("Test", Color.CornflowerBlue, Accord.Controls.Chart.SeriesType.Line, 3, true);
-            chartAusgabe.AddDataSeries("COOL", Color.LightBlue, Accord.Controls.Chart.SeriesType.Line, 3, true);
-            chartAusgabe.AddDataSeries("WARM", Color.LightCoral, Accord.Controls.Chart.SeriesType.Line, 3, true);
-            chartAusgabe.AddDataSeries("HOT", Color.Firebrick, Accord.Controls.Chart.SeriesType.Line, 3, true);
-        }
 
         private void btnTeilMengenOK_Click(object sender, EventArgs e)
         {
@@ -289,17 +278,68 @@ namespace FuzzyInput
             // Creating the inference system
             InferenceSystem IS = new InferenceSystem(fuzzyDB, new CentroidDefuzzifier(1000));
 
-            int i = 1;
+            int a = 0, b = 0, nachsteRegelB = 0, startpunkt = 0; 
             string strBasis = "";
             string strRegelNr = "";
-            foreach (Menge menge in Eingangsmengen)
+
+            // Anzahl der Eingänge und Teilmengen berechnen --> Grundlage für Regelbildung
+            int AnzTeilmengen = 0;
+            int AnzEingaenge = Eingangsmengen.Count();
+            foreach(Menge Eingang in Eingangsmengen)
+            {
+                AnzTeilmengen = AnzTeilmengen + Eingang.fuzzySets.Count();
+            }
+            // max. Anzahl Regeln
+            int AnzRegeln = AnzTeilmengen * AnzEingaenge;
+            List<string> Regeln = new List<string>();
+
+            // Regelstart wird gebildet für erstes Fuzzy-Set
+            Menge Startmenge = Eingangsmengen[0];
+            strBasis = "IF " + Startmenge.linguisticVariable.Name.ToString();
+            foreach (FuzzySet fuzzySet in Startmenge.fuzzySets)
+            {
+                string strFuzzyRegel = strBasis + " IS " + fuzzySet.Name.ToString();
+                while(a < AnzTeilmengen) { Regeln.Add(strFuzzyRegel);  a++; }
+                a = 0;
+            }
+            
+            // 0 -> + AnzTeilmengen + 1
+
+            // alle weiteren Eingangsmengen abhandeln
+            for(int i = 1; i <= Eingangsmengen.Count; i++)
+            {
+                Menge menge = Eingangsmengen[i];
+                List<string> UntermengenRegeln = iterateUntermengen(menge);
+                foreach(string Regel in UntermengenRegeln)
+                {
+                    for (b = nachsteRegelB; b < AnzRegeln;)
+                    {
+                        // x - mal pro Eingang anfügen
+                        while (a < AnzEingaenge) 
+                        {
+                            string strRegel = Regeln[b].ToString() + Regel.ToString();
+                            Regeln[b] = strRegel;
+                            a++; b++;
+                        };
+                        a = 0;
+                        nachsteRegelB = startpunkt + nachsteRegelB + AnzTeilmengen;
+                    }
+                    startpunkt = startpunkt + Eingangsmengen.Count;
+                    
+                }
+            }
+
+
+            /*
+                foreach (Menge menge in Eingangsmengen)
             {   
                 foreach(FuzzySet fuzzySet in menge.fuzzySets)
                 {
                     // Regel aufbauen -> Basis 
-                    strRegelNr = "Regel " + Convert.ToString(i);
+                    //strRegelNr = "Regel " + Convert.ToString(i);
                     strBasis = "IF " + menge.linguisticVariable.Name.ToString() + " IS " + fuzzySet.Name.ToString();
-                    i += 1;
+                    //i += 1;
+
 
                     if (Eingangsmengen.Count > 1)
                     {
@@ -308,21 +348,28 @@ namespace FuzzyInput
                         {
                             if (untermenge.linguisticVariable.Name != menge.linguisticVariable.Name)
                             {
-                                List<string> rules = iterateUntermengen(strBasis, untermenge);
+                                List<string> UntermengenRegeln = iterateUntermengen(untermenge);
+                              
+                                
+                                    foreach(string strRegel in UntermengenRegeln)
+                                    {
+                                        Regeln.Add(strRegel);
+                                    }
+                                
                             }
 
                         }
                     }
                 }
             }
-
+            */
             
 
             //Rule r1 = new Rule(fuzzyDB, "Test1", "WENN Steel is not Cold and Stove is Hot then Pressure is Low");
 
         }
 
-        public List<string>iterateUntermengen(string regel, Menge untermenge)
+        public List<string>iterateUntermengen(Menge untermenge)
         {
             List<string> rules = new List<string>();
             foreach (FuzzySet fuzzySetUntermenge in untermenge.fuzzySets)
@@ -333,6 +380,268 @@ namespace FuzzyInput
             return rules;
         }
 
+        private void beispieldatenGenerierenToolStripMenuItem_Click(object sender, EventArgs e)
+        {   
+            // vorhandene Daten löschen
+            lvEingang = null; Eingangsmenge = null; ; Ausgangsmenge = null;
+            fuzzyDB = null; Eingangsmengen = null; Ausgangsmengen = null;
+            lstEingang.Items.Clear(); lstIEingangTeilmengen.Items.Clear();
+            lstAusgang.Items.Clear(); lstAusgangTeilmengen.Items.Clear();
 
+            if (fuzzyDB == null) { fuzzyDB = new Database(); }
+            if (Eingangsmengen == null) { Eingangsmengen = new List<Menge>(); }
+            if(Ausgangsmengen == null) { Ausgangsmengen = new List<Menge>(); }
+
+            // Eingang Baujahr generieren
+            string strInputBez = "Baujahr";
+            float fInputMin = 1918f;
+            float fInputMax = 2016f;
+            lstEingang.Items.Add(strInputBez);
+            lstEingang.EndUpdate();
+            lvEingang = new LinguisticVariable(strInputBez, fInputMin, fInputMax);
+            Eingangsmenge = new Menge(lvEingang);
+            fuzzyDB.AddVariable(lvEingang);
+            Eingangsmengen.Add(Eingangsmenge);
+            
+            // Teilmenge Baujahre alt generieren
+            string strEingangTeilmenge = "alt";
+            float fEingangTeilStart = 1918f;
+            float fEingangTeilMax = 1918f;
+            float fEingangTeilMin = 1967f;
+            lstIEingangTeilmengen.Items.Add(strEingangTeilmenge);
+            lstIEingangTeilmengen.EndUpdate();
+
+            // Neues Fuzzy-Set anlegen (Teilmenge) 
+            TrapezoidalFunction trapezoidalFunction = new TrapezoidalFunction(fEingangTeilStart, fEingangTeilMax, fEingangTeilMin);
+            FuzzySet fuzzySet = new FuzzySet(strEingangTeilmenge, trapezoidalFunction);
+
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvEingang.AddLabel(fuzzySet);
+            Eingangsmenge.neuesFuzzySet(fuzzySet);
+
+            // Teilmenge Baujahre mittel generieren
+            strEingangTeilmenge = "mittel";
+            fEingangTeilStart = 1918f;
+            fEingangTeilMax = 1967f;
+            fEingangTeilMin = 2016f;
+            lstIEingangTeilmengen.Items.Add(strEingangTeilmenge);
+            lstIEingangTeilmengen.EndUpdate();
+
+            // Neues Fuzzy-Set anlegen (Teilmenge) 
+            trapezoidalFunction = new TrapezoidalFunction(fEingangTeilStart, fEingangTeilMax, fEingangTeilMin);
+            fuzzySet = new FuzzySet(strEingangTeilmenge, trapezoidalFunction);
+
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvEingang.AddLabel(fuzzySet);
+            Eingangsmenge.neuesFuzzySet(fuzzySet);
+
+            // Teilmenge Baujahre neu generieren
+            strEingangTeilmenge = "neu";
+            fEingangTeilStart = 1918f;
+            fEingangTeilMax = 2016f;
+            fEingangTeilMin = 1967f;
+            lstIEingangTeilmengen.Items.Add(strEingangTeilmenge);
+            lstIEingangTeilmengen.EndUpdate();
+
+            // Neues Fuzzy-Set anlegen (Teilmenge) 
+            trapezoidalFunction = new TrapezoidalFunction(fEingangTeilStart, fEingangTeilMax, TrapezoidalFunction.EdgeType.Right);
+            fuzzySet = new FuzzySet(strEingangTeilmenge, trapezoidalFunction);
+
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvEingang.AddLabel(fuzzySet);
+            Eingangsmenge.neuesFuzzySet(fuzzySet);
+
+            lvEingang = null; Eingangsmenge = null;
+
+            // Eingang Wohnungsgröße generieren
+            strInputBez = "Wohnungsgröße";
+            fInputMin = 15f;
+            fInputMax = 165f;
+            lstEingang.Items.Add(strInputBez);
+            lstEingang.EndUpdate();
+            lvEingang = new LinguisticVariable(strInputBez, fInputMin, fInputMax);
+            Eingangsmenge = new Menge(lvEingang);
+            fuzzyDB.AddVariable(lvEingang);
+            Eingangsmengen.Add(Eingangsmenge);
+
+            // Teilmenge Wohnungsgröße niedrig generieren
+            strEingangTeilmenge = "niedrig";
+            fEingangTeilStart = 15f;
+            fEingangTeilMax = 15f;
+            fEingangTeilMin = 90f;
+
+            // Neues Fuzzy-Set anlegen (Teilmenge) 
+            trapezoidalFunction = new TrapezoidalFunction(fEingangTeilStart, fEingangTeilMax, fEingangTeilMin);
+            fuzzySet = new FuzzySet(strEingangTeilmenge, trapezoidalFunction);
+
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvEingang.AddLabel(fuzzySet);
+            Eingangsmenge.neuesFuzzySet(fuzzySet);
+
+            // Teilmenge Wohnungsgröße mittel generieren
+            strEingangTeilmenge = "mittel";
+            fEingangTeilStart = 15f;
+            fEingangTeilMax = 90f;
+            fEingangTeilMin = 165f;
+
+            // Neues Fuzzy-Set anlegen (Teilmenge) 
+            trapezoidalFunction = new TrapezoidalFunction(fEingangTeilStart, fEingangTeilMax, fEingangTeilMin);
+            fuzzySet = new FuzzySet(strEingangTeilmenge, trapezoidalFunction);
+
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvEingang.AddLabel(fuzzySet);
+            Eingangsmenge.neuesFuzzySet(fuzzySet);
+
+            // Teilmenge Wohnungsgröße hoch generieren
+            strEingangTeilmenge = "hoch";
+            fEingangTeilStart = 15f;
+            fEingangTeilMax = 165f;
+
+            // Neues Fuzzy-Set anlegen (Teilmenge) 
+            trapezoidalFunction = new TrapezoidalFunction(fEingangTeilStart, fEingangTeilMax, TrapezoidalFunction.EdgeType.Right);
+            fuzzySet = new FuzzySet(strEingangTeilmenge, trapezoidalFunction);
+
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvEingang.AddLabel(fuzzySet);
+            Eingangsmenge.neuesFuzzySet(fuzzySet);
+            lvEingang = null; Eingangsmenge = null;
+
+            // Eingang Wohnlage generieren
+            strInputBez = "Wohnlage";
+            fInputMin = -0.6f;
+            fInputMax = 1.96f;
+            lstEingang.Items.Add(strInputBez);
+            lstEingang.EndUpdate();
+            lvEingang = new LinguisticVariable(strInputBez, fInputMin, fInputMax);
+            Eingangsmenge = new Menge(lvEingang);
+            fuzzyDB.AddVariable(lvEingang);
+            Eingangsmengen.Add(Eingangsmenge);
+
+            // Teilmenge Wohnlage niedrig generieren
+            strEingangTeilmenge = "einfach";
+            fEingangTeilStart = -0.6f;
+            fEingangTeilMax = -0.6f;
+            fEingangTeilMin = 0.68f;
+
+            // Neues Fuzzy-Set anlegen (Teilmenge) 
+            trapezoidalFunction = new TrapezoidalFunction(fEingangTeilStart, fEingangTeilMax, fEingangTeilMin);
+            fuzzySet = new FuzzySet(strEingangTeilmenge, trapezoidalFunction);
+
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvEingang.AddLabel(fuzzySet);
+            Eingangsmenge.neuesFuzzySet(fuzzySet);
+
+            // Teilmenge Wohnlage mittel generieren
+            strEingangTeilmenge = "mittel";
+            fEingangTeilStart = -0.6f;
+            fEingangTeilMax = 0.68f;
+            fEingangTeilMin = 1.96f;
+
+            // Neues Fuzzy-Set anlegen (Teilmenge) 
+            trapezoidalFunction = new TrapezoidalFunction(fEingangTeilStart, fEingangTeilMax, fEingangTeilMin);
+            fuzzySet = new FuzzySet(strEingangTeilmenge, trapezoidalFunction);
+
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvEingang.AddLabel(fuzzySet);
+            Eingangsmenge.neuesFuzzySet(fuzzySet);
+
+            // Teilmenge Wohnlage gut generieren
+            strEingangTeilmenge = "gut";
+            fEingangTeilStart = -0.6f;
+            fEingangTeilMax = 1.96f;
+            fEingangTeilMin = 0.68f;
+
+            // Neues Fuzzy-Set anlegen (Teilmenge) 
+            trapezoidalFunction = new TrapezoidalFunction(fEingangTeilStart, fEingangTeilMax, TrapezoidalFunction.EdgeType.Right);
+            fuzzySet = new FuzzySet(strEingangTeilmenge, trapezoidalFunction);
+
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvEingang.AddLabel(fuzzySet);
+            Eingangsmenge.neuesFuzzySet(fuzzySet);
+
+            lvEingang = null; Eingangsmenge = null;
+
+            // Ausgang generieren
+            string strAusgangBez = "Preis";
+            float fAusgangMin = 6.55f;
+            float fAusgangMax = 17.98f;
+            lstAusgang.Items.Add(strAusgangBez);
+            lstAusgang.EndUpdate();
+            lvAusgang = new LinguisticVariable(strAusgangBez, fAusgangMin, fAusgangMax);
+            Ausgangmenge = new Menge(lvAusgang);
+            Ausgangsmengen.Add(Ausgangmenge);
+
+            // Teilmenge Preis niedrig generieren
+            string strAusgangTeilmenge = "niedrig";
+            float fAusgangTeilStart = 6.55f;
+            float fAusgangTeilMax = 6.55f;
+            float fAusgangTeilMin = 8.55f;
+
+            // Neues Fuzzy-Set anlegen (Teilmenge) 
+            trapezoidalFunction = new TrapezoidalFunction(fAusgangTeilStart, fAusgangTeilMax, fAusgangTeilMin);
+            fuzzySet = new FuzzySet(strAusgangTeilmenge, trapezoidalFunction);
+
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvAusgang.AddLabel(fuzzySet);
+            Ausgangmenge.neuesFuzzySet(fuzzySet);
+
+
+            RegelbasisGenerieren();
+            InferenceSystem IS = new InferenceSystem(fuzzyDB, new CentroidDefuzzifier(1000));
+            //IS.NewRule("Rule 1", "IF FrontalDistance IS Far THEN Angle IS Zero");
+            //IS.NewRule("Rule 2", "IF FrontalDistance IS Near THEN Angle IS Positive");
+
+
+        }
+
+        private void RegelbasisGenerieren()
+        {
+            // Eingangsmengen zur Auswahl geben
+            DataGridViewComboBoxColumn Eingang = (DataGridViewComboBoxColumn)this.dtRegeln.Columns["Eingangmenge"];
+            Eingang.Items.Clear();
+            foreach(Menge menge in Eingangsmengen)
+            {
+                Eingang.Items.Add(menge.linguisticVariable.Name.ToString());
+            }
+
+            DataGridViewComboBoxColumn Ausgang = (DataGridViewComboBoxColumn)this.dtRegeln.Columns["Ausgangsmenge"];
+            Ausgang.Items.Clear();
+            foreach (Menge menge in Ausgangsmengen)
+            {
+                Ausgang.Items.Add(menge.linguisticVariable.Name.ToString());
+            }
+        }
+
+        private void dtRegeln_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if(dtRegeln.RowCount < 2) { return; }
+
+            // Eingangsmenge
+            if(e.ColumnIndex == 2)
+            {
+                DataGridViewComboBoxCell currentCb = (DataGridViewComboBoxCell)dtRegeln.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (currentCb.Value != null)
+                {
+                    foreach(Menge menge in Eingangsmengen)
+                    {
+                        if (menge.linguisticVariable.Name.ToString().Equals(currentCb.Value.ToString()))
+                        {
+                            DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dtRegeln.Rows[e.RowIndex].Cells[3];
+                            cb.Items.Clear();
+                            foreach (FuzzySet fuzzySet in menge.fuzzySets) { cb.Items.Add(fuzzySet.Name.ToString()); }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void dtRegeln_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (this.dtRegeln.IsCurrentCellDirty)
+            {
+                // This fires the cell value changed handler below
+                dtRegeln.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }
     }
 }
