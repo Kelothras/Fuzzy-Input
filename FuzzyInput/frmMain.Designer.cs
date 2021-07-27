@@ -156,7 +156,7 @@ namespace FuzzyInput
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnOffnenDatei);
             this.groupBox1.Controls.Add(this.btnNeuesSystem);
-            this.groupBox1.Location = new System.Drawing.Point(9, 26);
+            this.groupBox1.Location = new System.Drawing.Point(9, 42);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -202,7 +202,7 @@ namespace FuzzyInput
             this.tabPOutput.Margin = new System.Windows.Forms.Padding(2);
             this.tabPOutput.Name = "tabPOutput";
             this.tabPOutput.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPOutput.Size = new System.Drawing.Size(1192, 446);
+            this.tabPOutput.Size = new System.Drawing.Size(1282, 446);
             this.tabPOutput.TabIndex = 4;
             this.tabPOutput.Text = "Ausgangsmengen";
             // 
@@ -514,16 +514,16 @@ namespace FuzzyInput
             this.tabShowOutput.Margin = new System.Windows.Forms.Padding(2);
             this.tabShowOutput.Name = "tabShowOutput";
             this.tabShowOutput.Padding = new System.Windows.Forms.Padding(2);
-            this.tabShowOutput.Size = new System.Drawing.Size(1192, 446);
+            this.tabShowOutput.Size = new System.Drawing.Size(1282, 446);
             this.tabShowOutput.TabIndex = 3;
             this.tabShowOutput.Text = "Ausgabe";
             this.tabShowOutput.UseVisualStyleBackColor = true;
             // 
             // chartAusgabe
             // 
-            this.chartAusgabe.Location = new System.Drawing.Point(3, 5);
+            this.chartAusgabe.Location = new System.Drawing.Point(3, 131);
             this.chartAusgabe.Name = "chartAusgabe";
-            this.chartAusgabe.Size = new System.Drawing.Size(630, 197);
+            this.chartAusgabe.Size = new System.Drawing.Size(1271, 310);
             this.chartAusgabe.TabIndex = 0;
             this.chartAusgabe.Text = "Accord Chart";
             // 
@@ -564,6 +564,7 @@ namespace FuzzyInput
             this.dtRegeln.TabIndex = 10;
             this.dtRegeln.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtRegeln_CellValueChanged);
             this.dtRegeln.CurrentCellDirtyStateChanged += new System.EventHandler(this.dtRegeln_CurrentCellDirtyStateChanged);
+            this.dtRegeln.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dtRegeln_RowsAdded);
             // 
             // btnGenRules
             // 
@@ -588,7 +589,7 @@ namespace FuzzyInput
             this.tabPInput.Margin = new System.Windows.Forms.Padding(2);
             this.tabPInput.Name = "tabPInput";
             this.tabPInput.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPInput.Size = new System.Drawing.Size(1192, 446);
+            this.tabPInput.Size = new System.Drawing.Size(1282, 446);
             this.tabPInput.TabIndex = 0;
             this.tabPInput.Text = "Eingangsmengen";
             // 
@@ -939,7 +940,7 @@ namespace FuzzyInput
             this.Start.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
             this.Start.HeaderText = "Start";
             this.Start.Items.AddRange(new object[] {
-            "WENN"});
+            "IF"});
             this.Start.Name = "Start";
             // 
             // Eingangmenge
@@ -958,7 +959,7 @@ namespace FuzzyInput
             // 
             this.Operator.HeaderText = "Operator";
             this.Operator.Items.AddRange(new object[] {
-            "UND"});
+            "AND"});
             this.Operator.Name = "Operator";
             // 
             // Eingangsmenge_2
@@ -976,6 +977,8 @@ namespace FuzzyInput
             // Operator_2
             // 
             this.Operator_2.HeaderText = "Operator_2";
+            this.Operator_2.Items.AddRange(new object[] {
+            "AND"});
             this.Operator_2.Name = "Operator_2";
             // 
             // Eingangsmenge_3
@@ -993,6 +996,8 @@ namespace FuzzyInput
             // Schlussfolgerung
             // 
             this.Schlussfolgerung.HeaderText = "Schlussfolgerung";
+            this.Schlussfolgerung.Items.AddRange(new object[] {
+            "THEN"});
             this.Schlussfolgerung.Name = "Schlussfolgerung";
             // 
             // Ausgangsmenge

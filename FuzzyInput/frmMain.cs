@@ -604,6 +604,21 @@ namespace FuzzyInput
                 Eingang.Items.Add(menge.linguisticVariable.Name.ToString());
             }
 
+            // Eingangsmenge 2
+            Eingang = (DataGridViewComboBoxColumn)this.dtRegeln.Columns["Eingangsmenge_2"];
+            Eingang.Items.Clear();
+            foreach (Menge menge in Eingangsmengen)
+            {
+                Eingang.Items.Add(menge.linguisticVariable.Name.ToString());
+            }
+            // Eingangsmenge 3
+            Eingang = (DataGridViewComboBoxColumn)this.dtRegeln.Columns["Eingangsmenge_3"];
+            Eingang.Items.Clear();
+            foreach (Menge menge in Eingangsmengen)
+            {
+                Eingang.Items.Add(menge.linguisticVariable.Name.ToString());
+            }
+            // Ausgangsmenge
             DataGridViewComboBoxColumn Ausgang = (DataGridViewComboBoxColumn)this.dtRegeln.Columns["Ausgangsmenge"];
             Ausgang.Items.Clear();
             foreach (Menge menge in Ausgangsmengen)
@@ -642,6 +657,19 @@ namespace FuzzyInput
                 // This fires the cell value changed handler below
                 dtRegeln.CommitEdit(DataGridViewDataErrorContexts.Commit);
             }
+        }
+
+        private void dtRegeln_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            // Festwerte für Auswahl der Operatoren
+            DataGridViewComboBoxCell currentCb = (DataGridViewComboBoxCell)dtRegeln.Rows[e.RowIndex].Cells["Start"];
+            currentCb.Value = "IF";
+            currentCb = (DataGridViewComboBoxCell)dtRegeln.Rows[e.RowIndex].Cells["Operator"];
+            currentCb.Value = "AND";
+            currentCb = (DataGridViewComboBoxCell)dtRegeln.Rows[e.RowIndex].Cells["Operator_2"];
+            currentCb.Value = "AND";
+            currentCb = (DataGridViewComboBoxCell)dtRegeln.Rows[e.RowIndex].Cells["Schlussfolgerung"];
+            currentCb.Value = "THEN";
         }
     }
 }
