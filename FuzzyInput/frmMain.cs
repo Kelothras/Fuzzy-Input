@@ -20,6 +20,7 @@ namespace FuzzyInput
         public LinguisticVariable lvEingang;
         public LinguisticVariable lvAusgang;
         public Rulebase rulebase;
+        InferenceSystem IS;
         public Menge Eingangsmenge;
         public Menge Ausgangmenge;
         public List<Menge> Eingangsmengen;
@@ -80,6 +81,21 @@ namespace FuzzyInput
             btnSpeichernEingangTeilmenge.Enabled = false;
             btnLoeEingangTeilmenge.Enabled = false;
         }
+        private void deaktiviereAusgangsControls()
+        {
+            // Ausgangsmengen
+            txtBezAusgang.Enabled = false;
+            txtAusgangMin.Enabled = false;
+            txtAusgangMax.Enabled = false;
+            btnSpeichernAusgang.Enabled = false;
+
+            // AusgangsTeilmengen
+            txtBezAusgangTeilmenge.Enabled = false;
+            txtAusgangTeilStart.Enabled = false;
+            btnNeuAusgangTeilmenge.Enabled = false;
+            btnSpeichernAusgangTeilmenge.Enabled = false;
+        }
+
         private void aktiviereAusgangsControls()
         {
             txtBezAusgang.Enabled = true;
@@ -123,9 +139,9 @@ namespace FuzzyInput
         private void frmMain_Load(object sender, EventArgs e)
         {
             // Programmstart
-            //tabCFuzzy.Enabled = false;
-            //deaktiviereEingangsControls();
-
+            
+            deaktiviereEingangsControls();
+            deaktiviereAusgangsControls();
         }
 
         // Neues Fuzzy-System
@@ -176,16 +192,6 @@ namespace FuzzyInput
             lvEingang.AddLabel(fuzzySet);
             Eingangsmenge.neuesFuzzySet(fuzzySet);
 
-            /*
-            double[,] coolValues = new double[20, 2];
-            for (int i = 0; i < 30; i++)
-            {
-                coolValues[i - 10, 0] = i;
-                coolValues[i - 10, 1] = fuzzySet.GetMembership(i);
-            }
-            chartAusgabe.UpdateDataSeries("COOL", coolValues);
-            */
-
             // Felder leeren
             txtBezEingangTeilmenge.Text = "";
             txtEingangTeilStart.Text = "0";
@@ -230,6 +236,7 @@ namespace FuzzyInput
 
         private void btnNeuAusgang_Click(object sender, EventArgs e)
         {
+            if(Ausgangsmengen.Count > 0) { MessageBox.Show("Zur Zeit ist nur die Eingabe von einer Ausgangsmenge erlaubt","Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
             // Felder aktivieren und Farbe ändern
             aktiviereEingangsControls();
             txtBezAusgang.BackColor = Color.LightYellow;
@@ -266,21 +273,8 @@ namespace FuzzyInput
 
         private void btnGenRules_Click(object sender, EventArgs e)
         {
-            // Regelbasis löschen bzw. instanzieren
-            if(rulebase == null)
-            {
-                rulebase = new Rulebase();
-            }
-            else
-            {
-                rulebase.ClearRules();
-            }
-            // Creating the inference system
-            InferenceSystem IS = new InferenceSystem(fuzzyDB, new CentroidDefuzzifier(1000));
-
-            int a = 0, b = 0, nachsteRegelB = 0, startpunkt = 0; 
-            string strBasis = "";
-            string strRegelNr = "";
+            // DataGrid Regeln aufbauen
+            RegelGridGenerieren();
 
             // Anzahl der Eingänge und Teilmengen berechnen --> Grundlage für Regelbildung
             int AnzTeilmengen = 0;
@@ -294,79 +288,31 @@ namespace FuzzyInput
             List<string> Regeln = new List<string>();
 
             // Regelstart wird gebildet für erstes Fuzzy-Set
+            AnzTeilmengen = 1;
             Menge Startmenge = Eingangsmengen[0];
-            strBasis = "IF " + Startmenge.linguisticVariable.Name.ToString();
             foreach (FuzzySet fuzzySet in Startmenge.fuzzySets)
             {
-                string strFuzzyRegel = strBasis + " IS " + fuzzySet.Name.ToString();
-                while(a < AnzTeilmengen) { Regeln.Add(strFuzzyRegel);  a++; }
-                a = 0;
-            }
-            
-            // 0 -> + AnzTeilmengen + 1
-
-            // alle weiteren Eingangsmengen abhandeln
-            for(int i = 1; i <= Eingangsmengen.Count; i++)
-            {
-                Menge menge = Eingangsmengen[i];
-                List<string> UntermengenRegeln = iterateUntermengen(menge);
-                foreach(string Regel in UntermengenRegeln)
+                // Eingangsvariable 2 inkl. aller Fuzzy-Mengen
+                string strMengeVar2 = Eingangsmengen[1].linguisticVariable.Name;
+                foreach(FuzzySet fuzzySetVar2 in Eingangsmengen[1].fuzzySets)
                 {
-                    for (b = nachsteRegelB; b < AnzRegeln;)
+                    if(Eingangsmengen.Count == 3)
                     {
-                        // x - mal pro Eingang anfügen
-                        while (a < AnzEingaenge) 
+                        // Eingangsvariable 3 inkl. aller Fuzzy-Mengen
+                        string strMengeVar3 = Eingangsmengen[2].linguisticVariable.Name;
+                        foreach (FuzzySet fuzzySetVar3 in Eingangsmengen[2].fuzzySets)
                         {
-                            string strRegel = Regeln[b].ToString() + Regel.ToString();
-                            Regeln[b] = strRegel;
-                            a++; b++;
-                        };
-                        a = 0;
-                        nachsteRegelB = startpunkt + nachsteRegelB + AnzTeilmengen;
-                    }
-                    startpunkt = startpunkt + Eingangsmengen.Count;
-                    
-                }
-            }
-
-
-            /*
-                foreach (Menge menge in Eingangsmengen)
-            {   
-                foreach(FuzzySet fuzzySet in menge.fuzzySets)
-                {
-                    // Regel aufbauen -> Basis 
-                    //strRegelNr = "Regel " + Convert.ToString(i);
-                    strBasis = "IF " + menge.linguisticVariable.Name.ToString() + " IS " + fuzzySet.Name.ToString();
-                    //i += 1;
-
-
-                    if (Eingangsmengen.Count > 1)
-                    {
-                        // Regel um jede andere Eingangsvariable erweitern
-                        foreach (Menge untermenge in Eingangsmengen)
-                        {
-                            if (untermenge.linguisticVariable.Name != menge.linguisticVariable.Name)
-                            {
-                                List<string> UntermengenRegeln = iterateUntermengen(untermenge);
-                              
-                                
-                                    foreach(string strRegel in UntermengenRegeln)
-                                    {
-                                        Regeln.Add(strRegel);
-                                    }
-                                
-                            }
-
+                            dtRegeln.Rows.Add(AnzTeilmengen, "IF", fuzzySet.Name.ToString(), "AND", fuzzySetVar2.Name.ToString(), "AND", fuzzySetVar3.Name.ToString(), "THEN");
+                            AnzTeilmengen++;
                         }
                     }
+                    else { 
+                        dtRegeln.Rows.Add(AnzTeilmengen, "IF", fuzzySet.Name.ToString(), "AND", fuzzySetVar2.Name.ToString(), "THEN");
+                        AnzTeilmengen++;
+                    }
                 }
             }
-            */
             
-
-            //Rule r1 = new Rule(fuzzyDB, "Test1", "WENN Steel is not Cold and Stove is Hot then Pressure is Low");
-
         }
 
         public List<string>iterateUntermengen(Menge untermenge)
@@ -381,16 +327,17 @@ namespace FuzzyInput
         }
 
         private void beispieldatenGenerierenToolStripMenuItem_Click(object sender, EventArgs e)
-        {   
+        {
             // vorhandene Daten löschen
             lvEingang = null; Eingangsmenge = null; ; Ausgangsmenge = null;
             fuzzyDB = null; Eingangsmengen = null; Ausgangsmengen = null;
+            IS = null;
             lstEingang.Items.Clear(); lstIEingangTeilmengen.Items.Clear();
             lstAusgang.Items.Clear(); lstAusgangTeilmengen.Items.Clear();
 
             if (fuzzyDB == null) { fuzzyDB = new Database(); }
             if (Eingangsmengen == null) { Eingangsmengen = new List<Menge>(); }
-            if(Ausgangsmengen == null) { Ausgangsmengen = new List<Menge>(); }
+            if (Ausgangsmengen == null) { Ausgangsmengen = new List<Menge>(); }
 
             // Eingang Baujahr generieren
             string strInputBez = "Baujahr";
@@ -400,9 +347,8 @@ namespace FuzzyInput
             lstEingang.EndUpdate();
             lvEingang = new LinguisticVariable(strInputBez, fInputMin, fInputMax);
             Eingangsmenge = new Menge(lvEingang);
-            fuzzyDB.AddVariable(lvEingang);
             Eingangsmengen.Add(Eingangsmenge);
-            
+
             // Teilmenge Baujahre alt generieren
             string strEingangTeilmenge = "alt";
             float fEingangTeilStart = 1918f;
@@ -450,6 +396,7 @@ namespace FuzzyInput
             // Fuzzy-Menge zu Eingangsgröße hinzufügen
             lvEingang.AddLabel(fuzzySet);
             Eingangsmenge.neuesFuzzySet(fuzzySet);
+            fuzzyDB.AddVariable(lvEingang);
 
             lvEingang = null; Eingangsmenge = null;
 
@@ -461,7 +408,6 @@ namespace FuzzyInput
             lstEingang.EndUpdate();
             lvEingang = new LinguisticVariable(strInputBez, fInputMin, fInputMax);
             Eingangsmenge = new Menge(lvEingang);
-            fuzzyDB.AddVariable(lvEingang);
             Eingangsmengen.Add(Eingangsmenge);
 
             // Teilmenge Wohnungsgröße niedrig generieren
@@ -504,6 +450,8 @@ namespace FuzzyInput
             // Fuzzy-Menge zu Eingangsgröße hinzufügen
             lvEingang.AddLabel(fuzzySet);
             Eingangsmenge.neuesFuzzySet(fuzzySet);
+            fuzzyDB.AddVariable(lvEingang);
+
             lvEingang = null; Eingangsmenge = null;
 
             // Eingang Wohnlage generieren
@@ -514,7 +462,6 @@ namespace FuzzyInput
             lstEingang.EndUpdate();
             lvEingang = new LinguisticVariable(strInputBez, fInputMin, fInputMax);
             Eingangsmenge = new Menge(lvEingang);
-            fuzzyDB.AddVariable(lvEingang);
             Eingangsmengen.Add(Eingangsmenge);
 
             // Teilmenge Wohnlage niedrig generieren
@@ -559,6 +506,8 @@ namespace FuzzyInput
             lvEingang.AddLabel(fuzzySet);
             Eingangsmenge.neuesFuzzySet(fuzzySet);
 
+            fuzzyDB.AddVariable(lvEingang);
+
             lvEingang = null; Eingangsmenge = null;
 
             // Ausgang generieren
@@ -574,57 +523,96 @@ namespace FuzzyInput
             // Teilmenge Preis niedrig generieren
             string strAusgangTeilmenge = "niedrig";
             float fAusgangTeilStart = 6.55f;
-            float fAusgangTeilMax = 6.55f;
-            float fAusgangTeilMin = 8.55f;
+            lstAusgangTeilmengen.Items.Add(strAusgangTeilmenge);
+            lstAusgangTeilmengen.EndUpdate();
 
             // Neues Fuzzy-Set anlegen (Teilmenge) 
-            trapezoidalFunction = new TrapezoidalFunction(fAusgangTeilStart, fAusgangTeilMax, fAusgangTeilMin);
-            fuzzySet = new FuzzySet(strAusgangTeilmenge, trapezoidalFunction);
+            SingletonFunction singletonFunction = new SingletonFunction(fAusgangTeilStart);
+            fuzzySet = new FuzzySet(strAusgangTeilmenge, singletonFunction);
 
             // Fuzzy-Menge zu Eingangsgröße hinzufügen
             lvAusgang.AddLabel(fuzzySet);
             Ausgangmenge.neuesFuzzySet(fuzzySet);
 
+            // Teilmenge Preis niedrig generieren
+            strAusgangTeilmenge = "mittel";
+            fAusgangTeilStart = 12.2650f;
+            lstAusgangTeilmengen.Items.Add(strAusgangTeilmenge);
+            lstAusgangTeilmengen.EndUpdate();
 
-            RegelbasisGenerieren();
-            InferenceSystem IS = new InferenceSystem(fuzzyDB, new CentroidDefuzzifier(1000));
-            //IS.NewRule("Rule 1", "IF FrontalDistance IS Far THEN Angle IS Zero");
-            //IS.NewRule("Rule 2", "IF FrontalDistance IS Near THEN Angle IS Positive");
+            // Neues Fuzzy-Set anlegen (Teilmenge) 
+            singletonFunction = new SingletonFunction(fAusgangTeilStart);
+            fuzzySet = new FuzzySet(strAusgangTeilmenge, singletonFunction);
 
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvAusgang.AddLabel(fuzzySet);
+            Ausgangmenge.neuesFuzzySet(fuzzySet);
 
+            // Teilmenge Preis niedrig generieren
+            strAusgangTeilmenge = "hoch";
+            fAusgangTeilStart = 17.98f;
+            lstAusgangTeilmengen.Items.Add(strAusgangTeilmenge);
+            lstAusgangTeilmengen.EndUpdate();
+
+            // Neues Fuzzy-Set anlegen (Teilmenge) 
+            singletonFunction = new SingletonFunction(fAusgangTeilStart);
+            fuzzySet = new FuzzySet(strAusgangTeilmenge, singletonFunction);
+
+            // Fuzzy-Menge zu Eingangsgröße hinzufügen
+            lvAusgang.AddLabel(fuzzySet);
+            Ausgangmenge.neuesFuzzySet(fuzzySet);
+            fuzzyDB.AddVariable(lvAusgang);
         }
 
-        private void RegelbasisGenerieren()
+        private void RegelGridGenerieren()
         {
             // Eingangsmengen zur Auswahl geben
             DataGridViewComboBoxColumn Eingang = (DataGridViewComboBoxColumn)this.dtRegeln.Columns["Eingangmenge"];
             Eingang.Items.Clear();
-            foreach(Menge menge in Eingangsmengen)
+            Eingang.Name = Eingangsmengen[0].linguisticVariable.Name;
+            Eingang.HeaderText = Eingangsmengen[0].linguisticVariable.Name;
+            foreach (FuzzySet fuzzySet in Eingangsmengen[0].fuzzySets)
             {
-                Eingang.Items.Add(menge.linguisticVariable.Name.ToString());
+                Eingang.Items.Add(fuzzySet.Name);
             }
 
             // Eingangsmenge 2
             Eingang = (DataGridViewComboBoxColumn)this.dtRegeln.Columns["Eingangsmenge_2"];
             Eingang.Items.Clear();
-            foreach (Menge menge in Eingangsmengen)
+            Eingang.Name = Eingangsmengen[1].linguisticVariable.Name;
+            Eingang.HeaderText = Eingangsmengen[1].linguisticVariable.Name;
+            foreach (FuzzySet fuzzySet in Eingangsmengen[1].fuzzySets)
             {
-                Eingang.Items.Add(menge.linguisticVariable.Name.ToString());
+                Eingang.Items.Add(fuzzySet.Name);
             }
+
             // Eingangsmenge 3
-            Eingang = (DataGridViewComboBoxColumn)this.dtRegeln.Columns["Eingangsmenge_3"];
-            Eingang.Items.Clear();
-            foreach (Menge menge in Eingangsmengen)
-            {
-                Eingang.Items.Add(menge.linguisticVariable.Name.ToString());
+            if (Eingangsmengen.Count == 3) { 
+                Eingang = (DataGridViewComboBoxColumn)this.dtRegeln.Columns["Eingangsmenge_3"];
+                Eingang.Items.Clear();
+                Eingang.Name = Eingangsmengen[2].linguisticVariable.Name;
+                Eingang.HeaderText = Eingangsmengen[2].linguisticVariable.Name;
+                foreach (FuzzySet fuzzySet in Eingangsmengen[2].fuzzySets)
+                {
+                    Eingang.Items.Add(fuzzySet.Name);
+                }
             }
+            else { 
+                dtRegeln.Columns.Remove(Eingang);
+                Eingang = (DataGridViewComboBoxColumn)this.dtRegeln.Columns["Operator_2"];
+                dtRegeln.Columns.Remove(Eingang);
+            }
+
             // Ausgangsmenge
             DataGridViewComboBoxColumn Ausgang = (DataGridViewComboBoxColumn)this.dtRegeln.Columns["Ausgangsmenge"];
             Ausgang.Items.Clear();
-            foreach (Menge menge in Ausgangsmengen)
+            Ausgang.Name = Ausgangsmengen[0].linguisticVariable.Name;
+            Ausgang.HeaderText = Ausgangsmengen[0].linguisticVariable.Name; 
+            foreach (FuzzySet fuzzySet in Ausgangsmengen[0].fuzzySets)
             {
-                Ausgang.Items.Add(menge.linguisticVariable.Name.ToString());
+                Ausgang.Items.Add(fuzzySet.Name);
             }
+
         }
 
         private void dtRegeln_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -670,6 +658,51 @@ namespace FuzzyInput
             currentCb.Value = "AND";
             currentCb = (DataGridViewComboBoxCell)dtRegeln.Rows[e.RowIndex].Cells["Schlussfolgerung"];
             currentCb.Value = "THEN";
+        }
+
+        private void btnAusgabe_Click(object sender, EventArgs e)
+        {
+            IS = null;
+            if(IS == null)
+            {
+                IS = new InferenceSystem(fuzzyDB, new CentroidDefuzzifier(1000));
+            }
+
+            foreach(DataGridViewRow row in dtRegeln.Rows)
+            {
+                if(row.Cells[1].Value != null) { 
+                    string strRule = row.Cells[1].Value.ToString() + " " + dtRegeln.Columns[2].HeaderText + " IS " + row.Cells[2].Value + " " + row.Cells[3].Value + " " + dtRegeln.Columns[4].HeaderText + " IS " + row.Cells[4].Value;
+                    if(Eingangsmengen.Count == 3)
+                    {
+                        strRule = strRule + " " + row.Cells[5].Value + " " + dtRegeln.Columns[6].HeaderText + " IS " + row.Cells[6].Value; 
+                    }
+                    strRule = strRule + " " + row.Cells["Schlussfolgerung"].Value + " " + dtRegeln.Columns[Ausgangsmengen[0].linguisticVariable.Name].HeaderText + " IS " + row.Cells[Ausgangsmengen[0].linguisticVariable.Name].Value;
+                    IS.NewRule("Rule " + row.Cells[0].Value.ToString(), strRule);
+                }
+            }
+
+
+
+            //// setting inputs
+            //IS.SetInput("Baujahr", 2010);
+            //IS.SetInput("Wohnungsgröße", 110);
+            //IS.SetInput("Wohnlage", 0.69f);
+
+            //// getting outputs
+            //try
+            //{
+            //    FuzzyOutput fuzzyOutput = IS.ExecuteInference("Preis");
+
+            //    // showing the fuzzy output
+            //    foreach (FuzzyOutput.OutputConstraint oc in fuzzyOutput.OutputList)
+            //    {
+            //        Console.WriteLine(oc.Label + " - " + oc.FiringStrength.ToString());
+            //    }
+            //}
+            //catch (Exception)
+            //{
+
+            //}
         }
     }
 }

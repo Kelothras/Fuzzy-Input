@@ -49,10 +49,6 @@ namespace FuzzyInput
             this.label14 = new System.Windows.Forms.Label();
             this.txtBezAusgang = new System.Windows.Forms.TextBox();
             this.btnAusgangTeilMengenOK = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtAusgangTeilMin = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtAusgangTeilMax = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtAusgangTeilStart = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
@@ -63,9 +59,18 @@ namespace FuzzyInput
             this.label19 = new System.Windows.Forms.Label();
             this.lstAusgangTeilmengen = new System.Windows.Forms.ListBox();
             this.tabShowOutput = new System.Windows.Forms.TabPage();
-            this.chartAusgabe = new Accord.Controls.Chart();
+            this.btnAusgabe = new System.Windows.Forms.Button();
             this.tabPRule = new System.Windows.Forms.TabPage();
             this.dtRegeln = new System.Windows.Forms.DataGridView();
+            this.RegelNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Start = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Eingangmenge = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Operator = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Eingangsmenge_2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Operator_2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Eingangsmenge_3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Schlussfolgerung = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Ausgangsmenge = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.btnGenRules = new System.Windows.Forms.Button();
             this.tabPInput = new System.Windows.Forms.TabPage();
             this.btnEingangFertig = new System.Windows.Forms.Button();
@@ -97,19 +102,6 @@ namespace FuzzyInput
             this.tabCFuzzy = new System.Windows.Forms.TabControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.beispieldatenGenerierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RegelNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Start = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Eingangmenge = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Eingangteilmenge = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Operator = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Eingangsmenge_2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Eingangsteilmenge_2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Operator_2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Eingangsmenge_3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Eingangsteilmenge_3 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Schlussfolgerung = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Ausgangsmenge = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Ausgangsteilmenge = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.groupBox1.SuspendLayout();
             this.tabPOutput.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -156,7 +148,7 @@ namespace FuzzyInput
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.btnOffnenDatei);
             this.groupBox1.Controls.Add(this.btnNeuesSystem);
-            this.groupBox1.Location = new System.Drawing.Point(9, 42);
+            this.groupBox1.Location = new System.Drawing.Point(11, 42);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -202,7 +194,7 @@ namespace FuzzyInput
             this.tabPOutput.Margin = new System.Windows.Forms.Padding(2);
             this.tabPOutput.Name = "tabPOutput";
             this.tabPOutput.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPOutput.Size = new System.Drawing.Size(1282, 446);
+            this.tabPOutput.Size = new System.Drawing.Size(999, 446);
             this.tabPOutput.TabIndex = 4;
             this.tabPOutput.Text = "Ausgangsmengen";
             // 
@@ -244,10 +236,6 @@ namespace FuzzyInput
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel2.Controls.Add(this.btnAusgangTeilMengenOK);
-            this.splitContainer1.Panel2.Controls.Add(this.label15);
-            this.splitContainer1.Panel2.Controls.Add(this.txtAusgangTeilMin);
-            this.splitContainer1.Panel2.Controls.Add(this.label16);
-            this.splitContainer1.Panel2.Controls.Add(this.txtAusgangTeilMax);
             this.splitContainer1.Panel2.Controls.Add(this.label17);
             this.splitContainer1.Panel2.Controls.Add(this.txtAusgangTeilStart);
             this.splitContainer1.Panel2.Controls.Add(this.button5);
@@ -378,51 +366,15 @@ namespace FuzzyInput
             this.btnAusgangTeilMengenOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAusgangTeilMengenOK.UseVisualStyleBackColor = true;
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(8, 353);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(48, 13);
-            this.label15.TabIndex = 17;
-            this.label15.Text = "Minimum";
-            // 
-            // txtAusgangTeilMin
-            // 
-            this.txtAusgangTeilMin.Location = new System.Drawing.Point(11, 368);
-            this.txtAusgangTeilMin.Margin = new System.Windows.Forms.Padding(2);
-            this.txtAusgangTeilMin.Name = "txtAusgangTeilMin";
-            this.txtAusgangTeilMin.Size = new System.Drawing.Size(66, 20);
-            this.txtAusgangTeilMin.TabIndex = 16;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(8, 316);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(51, 13);
-            this.label16.TabIndex = 15;
-            this.label16.Text = "Maximum";
-            // 
-            // txtAusgangTeilMax
-            // 
-            this.txtAusgangTeilMax.Location = new System.Drawing.Point(11, 331);
-            this.txtAusgangTeilMax.Margin = new System.Windows.Forms.Padding(2);
-            this.txtAusgangTeilMax.Name = "txtAusgangTeilMax";
-            this.txtAusgangTeilMax.Size = new System.Drawing.Size(66, 20);
-            this.txtAusgangTeilMax.TabIndex = 14;
-            // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(8, 279);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(29, 13);
+            this.label17.Size = new System.Drawing.Size(30, 13);
             this.label17.TabIndex = 13;
-            this.label17.Text = "Start";
+            this.label17.Text = "Wert";
             // 
             // txtAusgangTeilStart
             // 
@@ -509,23 +461,29 @@ namespace FuzzyInput
             // 
             // tabShowOutput
             // 
-            this.tabShowOutput.Controls.Add(this.chartAusgabe);
+            this.tabShowOutput.BackColor = System.Drawing.SystemColors.Control;
+            this.tabShowOutput.Controls.Add(this.btnAusgabe);
             this.tabShowOutput.Location = new System.Drawing.Point(4, 22);
             this.tabShowOutput.Margin = new System.Windows.Forms.Padding(2);
             this.tabShowOutput.Name = "tabShowOutput";
             this.tabShowOutput.Padding = new System.Windows.Forms.Padding(2);
-            this.tabShowOutput.Size = new System.Drawing.Size(1282, 446);
+            this.tabShowOutput.Size = new System.Drawing.Size(999, 446);
             this.tabShowOutput.TabIndex = 3;
             this.tabShowOutput.Text = "Ausgabe";
-            this.tabShowOutput.UseVisualStyleBackColor = true;
             // 
-            // chartAusgabe
+            // btnAusgabe
             // 
-            this.chartAusgabe.Location = new System.Drawing.Point(3, 131);
-            this.chartAusgabe.Name = "chartAusgabe";
-            this.chartAusgabe.Size = new System.Drawing.Size(1271, 310);
-            this.chartAusgabe.TabIndex = 0;
-            this.chartAusgabe.Text = "Accord Chart";
+            this.btnAusgabe.AutoSize = true;
+            this.btnAusgabe.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAusgabe.Image = global::FuzzyInput.Properties.Resources.icons8_stumbleupon_20;
+            this.btnAusgabe.Location = new System.Drawing.Point(5, 5);
+            this.btnAusgabe.Name = "btnAusgabe";
+            this.btnAusgabe.Size = new System.Drawing.Size(79, 26);
+            this.btnAusgabe.TabIndex = 10;
+            this.btnAusgabe.Text = "Ausgabe";
+            this.btnAusgabe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAusgabe.UseVisualStyleBackColor = true;
+            this.btnAusgabe.Click += new System.EventHandler(this.btnAusgabe_Click);
             // 
             // tabPRule
             // 
@@ -536,7 +494,7 @@ namespace FuzzyInput
             this.tabPRule.Margin = new System.Windows.Forms.Padding(2);
             this.tabPRule.Name = "tabPRule";
             this.tabPRule.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPRule.Size = new System.Drawing.Size(1282, 446);
+            this.tabPRule.Size = new System.Drawing.Size(999, 446);
             this.tabPRule.TabIndex = 2;
             this.tabPRule.Text = "Regeln";
             // 
@@ -548,23 +506,78 @@ namespace FuzzyInput
             this.RegelNr,
             this.Start,
             this.Eingangmenge,
-            this.Eingangteilmenge,
             this.Operator,
             this.Eingangsmenge_2,
-            this.Eingangsteilmenge_2,
             this.Operator_2,
             this.Eingangsmenge_3,
-            this.Eingangsteilmenge_3,
             this.Schlussfolgerung,
-            this.Ausgangsmenge,
-            this.Ausgangsteilmenge});
+            this.Ausgangsmenge});
             this.dtRegeln.Location = new System.Drawing.Point(5, 37);
             this.dtRegeln.Name = "dtRegeln";
-            this.dtRegeln.Size = new System.Drawing.Size(1270, 404);
+            this.dtRegeln.Size = new System.Drawing.Size(986, 404);
             this.dtRegeln.TabIndex = 10;
             this.dtRegeln.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtRegeln_CellValueChanged);
             this.dtRegeln.CurrentCellDirtyStateChanged += new System.EventHandler(this.dtRegeln_CurrentCellDirtyStateChanged);
             this.dtRegeln.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dtRegeln_RowsAdded);
+            // 
+            // RegelNr
+            // 
+            this.RegelNr.HeaderText = "Nr.";
+            this.RegelNr.Name = "RegelNr";
+            this.RegelNr.Width = 25;
+            // 
+            // Start
+            // 
+            this.Start.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.Start.HeaderText = "Start";
+            this.Start.Items.AddRange(new object[] {
+            "IF"});
+            this.Start.Name = "Start";
+            // 
+            // Eingangmenge
+            // 
+            this.Eingangmenge.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.Eingangmenge.HeaderText = "Eingangsmenge";
+            this.Eingangmenge.Name = "Eingangmenge";
+            // 
+            // Operator
+            // 
+            this.Operator.HeaderText = "Operator";
+            this.Operator.Items.AddRange(new object[] {
+            "AND"});
+            this.Operator.Name = "Operator";
+            // 
+            // Eingangsmenge_2
+            // 
+            this.Eingangsmenge_2.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.Eingangsmenge_2.HeaderText = "Eingangsmenge_2";
+            this.Eingangsmenge_2.Name = "Eingangsmenge_2";
+            // 
+            // Operator_2
+            // 
+            this.Operator_2.HeaderText = "Operator_2";
+            this.Operator_2.Items.AddRange(new object[] {
+            "AND"});
+            this.Operator_2.Name = "Operator_2";
+            // 
+            // Eingangsmenge_3
+            // 
+            this.Eingangsmenge_3.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.Eingangsmenge_3.HeaderText = "Eingangsmenge_3";
+            this.Eingangsmenge_3.Name = "Eingangsmenge_3";
+            // 
+            // Schlussfolgerung
+            // 
+            this.Schlussfolgerung.HeaderText = "Schlussfolgerung";
+            this.Schlussfolgerung.Items.AddRange(new object[] {
+            "THEN"});
+            this.Schlussfolgerung.Name = "Schlussfolgerung";
+            // 
+            // Ausgangsmenge
+            // 
+            this.Ausgangsmenge.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.Ausgangsmenge.HeaderText = "Ausgangsmenge";
+            this.Ausgangsmenge.Name = "Ausgangsmenge";
             // 
             // btnGenRules
             // 
@@ -589,7 +602,7 @@ namespace FuzzyInput
             this.tabPInput.Margin = new System.Windows.Forms.Padding(2);
             this.tabPInput.Name = "tabPInput";
             this.tabPInput.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPInput.Size = new System.Drawing.Size(1282, 446);
+            this.tabPInput.Size = new System.Drawing.Size(999, 446);
             this.tabPInput.TabIndex = 0;
             this.tabPInput.Text = "Eingangsmengen";
             // 
@@ -909,7 +922,7 @@ namespace FuzzyInput
             this.tabCFuzzy.Margin = new System.Windows.Forms.Padding(2);
             this.tabCFuzzy.Name = "tabCFuzzy";
             this.tabCFuzzy.SelectedIndex = 0;
-            this.tabCFuzzy.Size = new System.Drawing.Size(1290, 472);
+            this.tabCFuzzy.Size = new System.Drawing.Size(1007, 472);
             this.tabCFuzzy.TabIndex = 0;
             // 
             // menuStrip1
@@ -918,7 +931,7 @@ namespace FuzzyInput
             this.beispieldatenGenerierenToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1299, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1016, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -929,96 +942,13 @@ namespace FuzzyInput
             this.beispieldatenGenerierenToolStripMenuItem.Text = "Beispieldaten generieren";
             this.beispieldatenGenerierenToolStripMenuItem.Click += new System.EventHandler(this.beispieldatenGenerierenToolStripMenuItem_Click);
             // 
-            // RegelNr
-            // 
-            this.RegelNr.HeaderText = "Nr.";
-            this.RegelNr.Name = "RegelNr";
-            this.RegelNr.Width = 25;
-            // 
-            // Start
-            // 
-            this.Start.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Start.HeaderText = "Start";
-            this.Start.Items.AddRange(new object[] {
-            "IF"});
-            this.Start.Name = "Start";
-            // 
-            // Eingangmenge
-            // 
-            this.Eingangmenge.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Eingangmenge.HeaderText = "Eingangsmenge";
-            this.Eingangmenge.Name = "Eingangmenge";
-            // 
-            // Eingangteilmenge
-            // 
-            this.Eingangteilmenge.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Eingangteilmenge.HeaderText = "Eingangsteilmenge";
-            this.Eingangteilmenge.Name = "Eingangteilmenge";
-            // 
-            // Operator
-            // 
-            this.Operator.HeaderText = "Operator";
-            this.Operator.Items.AddRange(new object[] {
-            "AND"});
-            this.Operator.Name = "Operator";
-            // 
-            // Eingangsmenge_2
-            // 
-            this.Eingangsmenge_2.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Eingangsmenge_2.HeaderText = "Eingangsmenge_2";
-            this.Eingangsmenge_2.Name = "Eingangsmenge_2";
-            // 
-            // Eingangsteilmenge_2
-            // 
-            this.Eingangsteilmenge_2.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Eingangsteilmenge_2.HeaderText = "Eingangsteilmenge_2";
-            this.Eingangsteilmenge_2.Name = "Eingangsteilmenge_2";
-            // 
-            // Operator_2
-            // 
-            this.Operator_2.HeaderText = "Operator_2";
-            this.Operator_2.Items.AddRange(new object[] {
-            "AND"});
-            this.Operator_2.Name = "Operator_2";
-            // 
-            // Eingangsmenge_3
-            // 
-            this.Eingangsmenge_3.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Eingangsmenge_3.HeaderText = "Eingangsmenge_3";
-            this.Eingangsmenge_3.Name = "Eingangsmenge_3";
-            // 
-            // Eingangsteilmenge_3
-            // 
-            this.Eingangsteilmenge_3.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Eingangsteilmenge_3.HeaderText = "Eingangsteilmenge_3";
-            this.Eingangsteilmenge_3.Name = "Eingangsteilmenge_3";
-            // 
-            // Schlussfolgerung
-            // 
-            this.Schlussfolgerung.HeaderText = "Schlussfolgerung";
-            this.Schlussfolgerung.Items.AddRange(new object[] {
-            "THEN"});
-            this.Schlussfolgerung.Name = "Schlussfolgerung";
-            // 
-            // Ausgangsmenge
-            // 
-            this.Ausgangsmenge.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Ausgangsmenge.HeaderText = "Ausgangsmenge";
-            this.Ausgangsmenge.Name = "Ausgangsmenge";
-            // 
-            // Ausgangsteilmenge
-            // 
-            this.Ausgangsteilmenge.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.Ausgangsteilmenge.HeaderText = "Ausgangsteilmenge";
-            this.Ausgangsteilmenge.Name = "Ausgangsteilmenge";
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1299, 576);
+            this.ClientSize = new System.Drawing.Size(1016, 576);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tabCFuzzy);
             this.Controls.Add(this.menuStrip1);
@@ -1038,6 +968,7 @@ namespace FuzzyInput
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabShowOutput.ResumeLayout(false);
+            this.tabShowOutput.PerformLayout();
             this.tabPRule.ResumeLayout(false);
             this.tabPRule.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtRegeln)).EndInit();
@@ -1078,10 +1009,6 @@ namespace FuzzyInput
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtBezAusgang;
         private System.Windows.Forms.Button btnAusgangTeilMengenOK;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox txtAusgangTeilMin;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txtAusgangTeilMax;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtAusgangTeilStart;
         private System.Windows.Forms.Button button5;
@@ -1092,7 +1019,6 @@ namespace FuzzyInput
         private System.Windows.Forms.Label label19;
         public System.Windows.Forms.ListBox lstAusgangTeilmengen;
         private System.Windows.Forms.TabPage tabShowOutput;
-        private Accord.Controls.Chart chartAusgabe;
         private System.Windows.Forms.TabPage tabPRule;
         private System.Windows.Forms.TabPage tabPInput;
         private System.Windows.Forms.Button btnEingangFertig;
@@ -1129,16 +1055,13 @@ namespace FuzzyInput
         private System.Windows.Forms.DataGridViewTextBoxColumn RegelNr;
         private System.Windows.Forms.DataGridViewComboBoxColumn Start;
         private System.Windows.Forms.DataGridViewComboBoxColumn Eingangmenge;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Eingangteilmenge;
         private System.Windows.Forms.DataGridViewComboBoxColumn Operator;
         private System.Windows.Forms.DataGridViewComboBoxColumn Eingangsmenge_2;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Eingangsteilmenge_2;
         private System.Windows.Forms.DataGridViewComboBoxColumn Operator_2;
         private System.Windows.Forms.DataGridViewComboBoxColumn Eingangsmenge_3;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Eingangsteilmenge_3;
         private System.Windows.Forms.DataGridViewComboBoxColumn Schlussfolgerung;
         private System.Windows.Forms.DataGridViewComboBoxColumn Ausgangsmenge;
-        private System.Windows.Forms.DataGridViewComboBoxColumn Ausgangsteilmenge;
+        private System.Windows.Forms.Button btnAusgabe;
     }
 }
 
